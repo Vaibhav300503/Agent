@@ -1,0 +1,23 @@
+server:
+  url: "https://carmela-unpublished-lou.ngrok-free.dev/api/v1/logs"
+  api_token: "Server@123"
+  verify_ssl: true
+  timeout_sec: 10
+
+agent:
+  polling_interval_sec: 5
+  buffer_path: "agent_buffer.db"
+  max_buffer_size_mb: 100
+  log_level: "INFO"
+
+logs:
+  windows_events:
+    - "Security"
+    - "System"
+    - "Application"
+  # Linux paths will be ignored on Windows and vice versa by the respective collectors
+  linux_files:
+    - "/var/log/syslog"
+    - "/var/log/auth.log"
+    - "/var/log/secure"
+    - "/var/log/messages"
