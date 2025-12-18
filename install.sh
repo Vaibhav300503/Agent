@@ -211,14 +211,17 @@ echo -e "${GREEN}✓ Redis configured at $REDIS_CONF${NC}"
 echo "Installing Python packages..."
 apt install -y python3-pip python3-venv >/dev/null 2>&1
 
+# Get the directory where the script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # Create installation directory
 echo "Creating installation directory..."
 mkdir -p $INSTALL_DIR
 cd $INSTALL_DIR
 
 # Copy server files
-echo "Copying server files..."
-cp -r /tmp/soc-server/* .
+echo "Copying server files from $SCRIPT_DIR..."
+cp -r "$SCRIPT_DIR/"* .
 
 # Create Python virtual environment
 echo "Setting up Python virtual environment..."
