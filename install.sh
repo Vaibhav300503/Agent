@@ -12,6 +12,33 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+# Helper function to ensure a service is enabled and running
+ensure_service_running() {
+    local SERVICE_NAME=$1
+    echo -n "Checking $SERVICE_NAME status... "
+    
+    if systemctl list-unit-files | grep -q "^$SERVICE_NAME.service"; then
+        if systemctl is-active --quiet "$SERVICE_NAME"; then
+            echo -e "${GREEN}Running${NC}"
+        else
+            echo -e "${YELLOW}Stopped. Attempting to start...${NC}"
+            if sudo systemctl start "$SERVICE_NAME"; then
+                echo -e "${GREEN}✓ Started $SERVICE_NAME${NC}"
+            else
+                echo -e "${RED}✗ Failed to start $SERVICE_NAME. Please check logs: journalctl -u $SERVICE_NAME${NC}"
+            fi
+        fi
+        
+        if ! systemctl is-enabled --quiet "$SERVICE_NAME"; then
+            echo -e "${YELLOW}Service is disabled. Enabling...${NC}"
+            sudo systemctl enable "$SERVICE_NAME" >/dev/null 2>&1
+        fi
+    else
+        echo -e "${RED}Not installed${NC}"
+        return 1
+    fi
+}
+
 echo "========================================"
 echo "  SOC Platform Server Installation"
 echo "========================================"
@@ -42,19 +69,19 @@ echo "Checking prerequisites..."
 command -v python3 >/dev/null 2>&1 || { echo -e "${RED}✗ Python3 not found${NC}"; exit 1; }
 echo -e "${GREEN}✓ Python3 found: $(python3 --version)${NC}"
 
-# Check if MongoDB is installed
+# Check if MongoDB is installed and running
 if command -v mongod >/dev/null 2>&1; then
-    echo -e "${GREEN}✓ MongoDB already installed${NC}"
     INSTALL_MONGODB=false
+    ensure_service_running "mongod" || INSTALL_MONGODB=true
 else
     echo -e "${YELLOW}! MongoDB not found - will install${NC}"
     INSTALL_MONGODB=true
 fi
 
-# Check if Redis is installed
+# Check if Redis is installed and running
 if command -v redis-server >/dev/null 2>&1; then
-    echo -e "${GREEN}✓ Redis already installed${NC}"
     INSTALL_REDIS=false
+    ensure_service_running "redis" || INSTALL_REDIS=true
 else
     echo -e "${YELLOW}! Redis not found - will install${NC}"
     INSTALL_REDIS=true
@@ -365,7 +392,7 @@ rules = [
 ]
 
 for rule in rules:
-    db.rules.update_one({"rule_id": rule["rule_id"]}, {"\\$set": rule}, upsert=True)
+    db.rules.update_one({"rule_id": rule["rule_id"]}, {"\$set": rule}, upsert=True)
 
 print(f"✓ Seeded {len(rules)} detection rules")
 EOF
@@ -438,22 +465,28 @@ LOGROTATE_EOF
 
 echo -e "${GREEN}✓ Log rotation configured${NC}"
 
+# Final status check of core dependencies
+echo ""
+echo "Verifying core services before startup..."
+ensure_service_running "mongod" || { echo -e "${RED}ERROR: MongoDB is required but not running.${NC}"; exit 1; }
+ensure_service_running "redis" || { echo -e "${RED}ERROR: Redis is required but not running.${NC}"; exit 1; }
+
 # Start the service
+echo ""
 echo "Starting SOC Platform..."
+systemctl daemon-reload
 systemctl enable soc-platform >/dev/null 2>&1
 systemctl start soc-platform
 
 # Wait for service to start
 sleep 3
 
-# Check service status
-if systemctl is-active --quiet soc-platform; then
-    echo -e "${GREEN}✓ SOC Platform started successfully${NC}"
-else
+# Check service status using our helper function
+ensure_service_running "soc-platform" || {
     echo -e "${RED}✗ SOC Platform failed to start${NC}"
-    echo "Check logs: journalctl -u soc-platform -n 50"
+    echo "Check logs: sudo journalctl -u soc-platform -n 100 --no-pager"
     exit 1
-fi
+}
 
 # Print summary
 echo ""
