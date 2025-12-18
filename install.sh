@@ -124,39 +124,50 @@ if [ "$INSTALL_MONGODB" = true ]; then
     apt update -qq && apt install -y gnupg wget curl lsb-release >/dev/null 2>&1
     
     # Detect OS specifics for MongoDB
+    LSB_CODENAME=$(lsb_release -cs)
     MONGODB_VERSION_GPG="6.0"
+    
     if [ "$OS" = "ubuntu" ]; then
         REPO_URL="https://repo.mongodb.org/apt/ubuntu"
-        REPO_DIST="$(lsb_release -cs)/mongodb-org/6.0"
         REPO_COMP="multiverse"
+        if [ "$VER" = "24.04" ] || [ "$LSB_CODENAME" = "noble" ]; then
+            MONGODB_VERSION_GPG="7.0"
+            REPO_DIST="noble/mongodb-org/7.0"
+            echo -e "${YELLOW}! Ubuntu 24.04 detected: Using MongoDB 7.0 for compatibility${NC}"
+        else
+            MONGODB_VERSION_GPG="6.0"
+            REPO_DIST="${LSB_CODENAME}/mongodb-org/6.0"
+        fi
     elif [ "$OS" = "debian" ]; then
         REPO_URL="https://repo.mongodb.org/apt/debian"
-        if [ "$VER" = "12" ]; then
-            # Debian 12 needs MongoDB 7.0+ for libssl3 support
-            REPO_DIST="bookworm/mongodb-org/7.0"
+        REPO_COMP="main"
+        if [ "$VER" = "12" ] || [ "$LSB_CODENAME" = "bookworm" ]; then
             MONGODB_VERSION_GPG="7.0"
+            REPO_DIST="bookworm/mongodb-org/7.0"
             echo -e "${YELLOW}! Debian 12 detected: Using MongoDB 7.0 for compatibility${NC}"
         else
-            REPO_DIST="$(lsb_release -cs)/mongodb-org/6.0"
-            REPO_COMP="main"
+            MONGODB_VERSION_GPG="6.0"
+            REPO_DIST="${LSB_CODENAME}/mongodb-org/6.0"
         fi
-        REPO_COMP="main"
     else
         echo -e "${RED}ERROR: Unsupported OS for automated MongoDB install. Please install MongoDB manually.${NC}"
         exit 1
     fi
 
     # Import MongoDB GPG key (modern way)
+    echo "Importing MongoDB ${MONGODB_VERSION_GPG} GPG key..."
     curl -fsSL https://www.mongodb.org/static/pgp/server-${MONGODB_VERSION_GPG}.asc | \
         gpg --dearmor --yes -o /usr/share/keyrings/mongodb-server.gpg
     
     # Add MongoDB repository
+    echo "Adding MongoDB ${MONGODB_VERSION_GPG} repository..."
     echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server.gpg ] $REPO_URL $REPO_DIST $REPO_COMP" | \
         tee /etc/apt/sources.list.d/mongodb-org-${MONGODB_VERSION_GPG}.list > /dev/null
     
     apt update -qq
+    echo "Installing mongodb-org packet..."
     apt install -y mongodb-org >/dev/null 2>&1 || {
-        echo -e "${RED}ERROR: MongoDB installation failed. The repository might not be supported for your version yet.${NC}"
+        echo -e "${RED}ERROR: MongoDB installation failed.${NC}"
         echo "Try installing MongoDB manually following official instructions for $(lsb_release -d)"
         exit 1
     }
