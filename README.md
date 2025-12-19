@@ -28,3 +28,4 @@ echo "Here are the last 20 lines of the error:"
 echo "------------------------------------------"
 tail -n 20 error_log.txt
 echo "------------------------------------------"
+https://2b288541ec06.ngrok-free.app/
