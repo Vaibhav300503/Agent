@@ -1,7 +1,8 @@
 # Build Agent EXE using PyInstaller
 
-Write-Host "Checking for PyInstaller..."
-pip install pyinstaller pywin32 pyyaml requests
+Write-Host "Checking for dependencies..."
+pip install -r "$PSScriptRoot\requirements.txt"
+pip install pyinstaller
 
 $ProjectRoot = $PSScriptRoot
 $SourceFile = "$ProjectRoot\src\service_windows.py"
@@ -10,14 +11,16 @@ $DistDir = "$ProjectRoot\dist_$Timestamp"
 
 # Clean previous build
 if (Test-Path "$DistDir") { 
-    Write-Host "Previous build detected at: $DistDir"
-    $response = Read-Host "Do you want to replace it? (Y/N)"
-    if ($response -ne 'Y' -and $response -ne 'y') {
-        Write-Host "Build cancelled by user."
-        Read-Host -Prompt "Press Enter to exit..."
-        exit 0
-    }
+    Write-Host "Cleaning previous timestamped build: $DistDir"
     Remove-Item -Path "$DistDir" -Recurse -Force 
+}
+if (Test-Path "$ProjectRoot\dist") { 
+    Write-Host "Cleaning default dist folder..."
+    Remove-Item -Path "$ProjectRoot\dist" -Recurse -Force 
+}
+if (Test-Path "$ProjectRoot\build") { 
+    Write-Host "Cleaning default build folder..."
+    Remove-Item -Path "$ProjectRoot\build" -Recurse -Force 
 }
 
 Write-Host "Building EXE..."
@@ -26,6 +29,7 @@ Write-Host "Building EXE..."
 # Using python -m PyInstaller to ensure we use the installed module even if PATH isn't updated
 # Adding --collect-all for pywin32 packages significantly increases size but ensures all DLLs and hidden deps are found
 python -m PyInstaller --noconfirm --onedir --console --name "SocAgent" --clean `
+    --distpath "$DistDir" `
     --paths "$ProjectRoot" `
     --add-data "$ProjectRoot\src;src" `
     --collect-all "pywin32" `
@@ -42,6 +46,9 @@ python -m PyInstaller --noconfirm --onedir --console --name "SocAgent" --clean `
     --hidden-import "src.collectors" `
     --hidden-import "src.collectors.windows" `
     --hidden-import "src.collectors.base" `
+    --hidden-import "uuid" `
+    --hidden-import "psutil" `
+    --hidden-import "watchdog" `
     "$SourceFile"
 
 if (-not $?) {

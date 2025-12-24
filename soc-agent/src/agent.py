@@ -21,8 +21,9 @@ if parent_dir not in sys.path:
 from config import Config
 from transport import Transport
 # from collectors.windows import WindowsCollector (Imported conditionally)
-from collectors.linux import LinuxCollector
-from collectors.network import NetworkCollector
+# Collectors are imported conditionally inside main to avoid issues on different platforms
+# from collectors.linux import LinuxCollector 
+# from collectors.network import NetworkCollector
 from utils import get_hostname, get_ip_address, get_os_type, get_agent_id
 import threading
 import json
@@ -64,6 +65,7 @@ def main():
             logging.error(f"Failed to start Windows collector: {e}")
     else:
         try:
+            from collectors.linux import LinuxCollector
             linux = LinuxCollector(config, transport)
             linux.start()
             collectors.append(linux)
@@ -75,6 +77,7 @@ def main():
     if config.config.get('network', {}).get('enabled', False):
         logging.info("Starting Network Collector")
         try:
+            from collectors.network import NetworkCollector
             nc = NetworkCollector(config, transport)
             nc.start()
             collectors.append(nc)

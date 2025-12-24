@@ -314,6 +314,87 @@ def seed_rules():
                 ]
             },
             "mitre_technique": ["T1027"]
+        },
+        # --- Network & Bandwidth ---
+        {
+            "rule_id": "SOC-NET-001",
+            "name": "High Bandwidth Anomaly",
+            "description": "Detection of significant spikes in network bandwidth, potentially indicating data exfiltration or DDoS.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "event_type": "traffic_anomaly",
+                "filters": [
+                    {"field": "log_source", "operator": "eq", "value": "network_bandwidth"}
+                ]
+            },
+            "mitre_technique": ["T1048", "T1498"]
+        },
+        {
+            "rule_id": "SOC-NET-002",
+            "name": "Potential Port Scan Detected",
+            "description": "Heuristic detection of multiple unique ports blocked from a single source IP.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "event_type": "port_scan_detected",
+                "group_by": ["source_ip"]
+            },
+            "mitre_technique": ["T1595.001"]
+        },
+        # --- Endpoint Protection & FIM ---
+        {
+            "rule_id": "SOC-FIM-001",
+            "name": "Ransomware Canary Alert",
+            "description": "Modification or deletion of a FIM Canary file, strongly indicating ransomware activity.",
+            "severity": "critical",
+            "enabled": True,
+            "conditions": {
+                "event_type": "canary_file_alert"
+            },
+            "mitre_technique": ["T1486"]
+        },
+        {
+            "rule_id": "SOC-AV-001",
+            "name": "Malware Detection Alert",
+            "description": "Threat identified by endpoint antivirus (Windows Defender).",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "event_type": "malware_detection",
+                "log_source": "windows_defender"
+            },
+            "mitre_technique": ["T1204.002"]
+        },
+        # --- Application Security ---
+        {
+            "rule_id": "SOC-APP-001",
+            "name": "Database Authentication Brute Force",
+            "description": "Multiple failed database login attempts from a single source.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "event_type": "authentication_failure",
+                "log_source": "database",
+                "threshold": 5,
+                "timeframe": "10m",
+                "group_by": ["source_ip"]
+            },
+            "mitre_technique": ["T1110"]
+        },
+        {
+            "rule_id": "SOC-APP-002",
+            "name": "Web Infrastructure DoS Attempt",
+            "description": "High frequency of web requests from a single client indicating potential DoS.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "event_type": "high_request_frequency",
+                "threshold": 2, # Already pre-aggregated by agent to some extent
+                "timeframe": "5m",
+                "group_by": ["client_ip"]
+            },
+            "mitre_technique": ["T1498"]
         }
     ]
     

@@ -82,8 +82,21 @@ class SocAgentService(win32serviceutil.ServiceFramework):
 
 if __name__ == '__main__':
     if len(sys.argv) == 1:
-        servicemanager.Initialize()
-        servicemanager.PrepareToHostSingle(SocAgentService)
-        servicemanager.StartServiceCtrlDispatcher()
+        # Check if we are running in a console
+        if sys.stdin and sys.stdin.isatty():
+            print("SOC Agent Windows Service")
+            print("-------------------------")
+            print("Usage:")
+            print("  SocAgent.exe install    - Install the service")
+            print("  SocAgent.exe remove     - Remove the service")
+            print("  SocAgent.exe start      - Start the service")
+            print("  SocAgent.exe stop       - Stop the service")
+            print("  SocAgent.exe debug      - Run in debug mode (console)")
+            print("\nTo install and start as a service, use 'setup.bat' or run as Admin.")
+            input("\nPress Enter to exit...")
+        else:
+            servicemanager.Initialize()
+            servicemanager.PrepareToHostSingle(SocAgentService)
+            servicemanager.StartServiceCtrlDispatcher()
     else:
         win32serviceutil.HandleCommandLine(SocAgentService)
