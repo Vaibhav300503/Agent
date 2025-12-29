@@ -104,6 +104,13 @@ class Config:
                         '/root'
                     ]
                 }
+            },
+            'timing': {
+                'heartbeat_interval_sec': 420,  # 7 minutes
+                'batch_interval_sec': 200       # 200 seconds
+            },
+            'tls_monitoring': {
+                'enabled': False
             }
         }
         return default
@@ -184,3 +191,21 @@ class Config:
     # DNS logs
     def get_dns_logs(self):
         return self.config.get('logs', {}).get('dns_logs', [])
+    
+    # Timing Configuration
+    @property
+    def heartbeat_interval(self):
+        """Get heartbeat interval in seconds (default: 420s / 7 min)"""
+        return self.config.get('timing', {}).get('heartbeat_interval_sec', 420)
+    
+    @property
+    def batch_interval(self):
+        """Get log batch transmission interval in seconds (default: 200s)"""
+        return self.config.get('timing', {}).get('batch_interval_sec', 200)
+    
+    # TLS Monitoring
+    @property
+    def enable_tls_monitoring(self):
+        """Check if TLS monitoring is enabled"""
+        return self.config.get('tls_monitoring', {}).get('enabled', False)
+

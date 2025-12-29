@@ -17,22 +17,43 @@ This document explains the data flow and internal logic of the SOC Agent and Ser
 
 ---
 
+## ⏱️ Timing Configuration (v2.1.0)
+
+| Timer | Interval | Purpose |
+|-------|----------|---------|
+| **Heartbeat** | 420 seconds (7 min) | Agent status reporting with health metrics |
+| **Log Batch** | 200 seconds | Buffered log transmission to server |
+| **Collector Polling** | 60-120 seconds | Log source polling frequency |
+
+### Enhanced Heartbeat Payload
+The heartbeat now includes:
+- `uptime` - Agent uptime in seconds
+- `event_count` - Total events processed
+- `last_log_sent_timestamp` - Last successful transmission
+- `log_gap_seconds` - Seconds since last success (offline detection)
+- `status` - Agent health (healthy/degraded/stopping)
+
+---
+
 ## 🕵️‍♂️ Collector Implementation Details
 
 ### Windows Collector (`windows.py`)
 Uses the `win32evtlog` Python library to read Windows Event Channels.
 - It maintains "checkpoints" using the `RecordId` and `TimeGenerated` to avoid reading the same log twice.
 - Specialized parsers look for specific Event IDs (e.g., 4624 for Login) and extract key fields like Source IP and Account Name.
+- **v2.1.0**: Normalized auth fields (`auth_status`, `auth_method`, `login_type`)
 
 ### Linux Collector (`linux.py`)
 Tails log files by tracking file offsets.
 - It detects file rotations (when a file is truncated).
 - Uses regex patterns for standard formats like Syslog, Nginx access logs, and Auth logs.
+- **v2.1.0**: Parses `query_string` separately from URI, normalized auth fields
 
 ### Network Collector (`network.py`)
 Uses the `psutil` library.
 - Periodically scans all socket connections.
 - Compares the current snapshot with the previous one to detect new connections.
+- **v2.1.0**: Tracks connection `duration`, includes flow metric placeholders
 
 ### FIM Collector (`fim.py`)
 Uses the `watchdog` library.
@@ -55,6 +76,16 @@ The `sanitizer.py` module is a critical security component. It:
 
 - `raw_logs`: Incoming logs before processing.
 - `processed_events`: Normalized and enriched logs.
-- `rules`: Detection logic (Condition, Threshold, Severity).
+- `rules`: Detection logic (Condition, Threshold, Severity) - **46+ rules in v2.1.0**
 - `alerts`: Generated security alerts.
 - `agents`: Metadata for all registered agents and their heartbeat status.
+
+---
+
+## 📚 Additional Documentation
+
+- [Detection Rules](DETECTION_RULES.md) - Full rule reference with MITRE ATT&CK mappings
+- [Log Schema](LOG_SCHEMA.md) - Complete field reference for all log sources
+- [Features](FEATURES.md) - Capability overview
+- [Installation](INSTALLATION.md) - Deployment guide
+

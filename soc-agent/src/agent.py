@@ -24,7 +24,7 @@ from transport import Transport
 # Collectors are imported conditionally inside main to avoid issues on different platforms
 # from collectors.linux import LinuxCollector 
 # from collectors.network import NetworkCollector
-from utils import get_hostname, get_ip_address, get_os_type, get_agent_id
+from utils import get_hostname, get_ip_address, get_os_type, get_agent_id, get_uptime
 import threading
 import json
 from datetime import datetime
@@ -100,8 +100,18 @@ def main():
         
     # Start Heartbeat Thread
     logging.info("Starting Heartbeat Thread")
+    
+    # Shared state for heartbeat tracking
+    heartbeat_state = {
+        'event_count': 0,
+        'last_log_sent_timestamp': None,
+        'log_gap_seconds': 0
+    }
+    
     def heartbeat_loop():
         agent_id = get_agent_id()
+        heartbeat_interval = config.heartbeat_interval  # 420 seconds (7 min)
+        
         while transport.running:
             try:
                 # Calculate buffer size (rough estimate)
@@ -109,22 +119,35 @@ def main():
                 if os.path.exists(config.buffer_path):
                     buffer_size = os.path.getsize(config.buffer_path)
                 
+                # Determine agent status
+                status = "healthy"
+                if buffer_size > 10 * 1024 * 1024:  # > 10MB buffer = degraded
+                    status = "degraded"
+                if not transport.running:
+                    status = "stopping"
+                
                 heartbeat_data = {
                     "agent_id": agent_id,
                     "hostname": get_hostname(),
-                    "endpoint_name": get_hostname(), # Map hostname to endpoint_name as requested
+                    "endpoint_name": get_hostname(),
                     "ip_address": get_ip_address(),
                     "os_type": get_os_type(),
-                    "agent_version": "2.0.0",
+                    "agent_version": "2.1.0",
                     "buffer_size_bytes": buffer_size,
-                    "timestamp": datetime.now().isoformat()
+                    "timestamp": datetime.now().isoformat(),
+                    # Enhanced heartbeat fields
+                    "uptime": get_uptime(),
+                    "event_count": transport.get_event_count(),
+                    "last_log_sent_timestamp": transport.get_last_sent_timestamp(),
+                    "log_gap_seconds": transport.get_log_gap_seconds(),
+                    "status": status
                 }
                 transport.send_heartbeat(heartbeat_data)
             except Exception as e:
                 logging.error(f"Heartbeat loop error: {e}")
             
-            # Wait 60 seconds (or until agent stops)
-            for _ in range(60):
+            # Wait for heartbeat_interval seconds (or until agent stops)
+            for _ in range(heartbeat_interval):
                 if not transport.running: break
                 time.sleep(1)
 

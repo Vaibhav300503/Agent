@@ -395,6 +395,284 @@ def seed_rules():
                 "group_by": ["client_ip"]
             },
             "mitre_technique": ["T1498"]
+        },
+        
+        # === NEW ENTERPRISE-GRADE DETECTION RULES ===
+        
+        # --- Network Flow Metrics Rules ---
+        {
+            "rule_id": "SOC-NET-003",
+            "name": "Data Exfiltration - High Bytes Sent",
+            "description": "Unusually high bytes_sent from single endpoint indicating potential data exfiltration.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "log_source": "network_bandwidth",
+                "filters": [
+                    {"field": "direction", "operator": "eq", "value": "outbound"},
+                    {"field": "volume_mb", "operator": "gte", "value": 100}
+                ],
+                "threshold": 3,
+                "timeframe": "1h",
+                "group_by": ["hostname"]
+            },
+            "mitre_technique": ["T1048"],
+            "false_positive_notes": "Legitimate large file uploads, backups, video conferencing"
+        },
+        {
+            "rule_id": "SOC-NET-004",
+            "name": "Beaconing Detection - Periodic Low Volume Traffic",
+            "description": "Detection of periodic C2 beaconing patterns with consistent timing intervals.",
+            "severity": "medium",
+            "enabled": True,
+            "conditions": {
+                "log_source": "network_snapshot",
+                "filters": [
+                    {"field": "status", "operator": "eq", "value": "ESTABLISHED"},
+                    {"field": "bytes_sent", "operator": "lt", "value": 1000}
+                ],
+                "threshold": 10,
+                "timeframe": "30m",
+                "group_by": ["dst_ip", "hostname"]
+            },
+            "mitre_technique": ["T1071", "T1573"],
+            "false_positive_notes": "Heartbeat services, monitoring agents, NTP"
+        },
+        {
+            "rule_id": "SOC-NET-005",
+            "name": "Port Scan - High Packet Rate",
+            "description": "Rapid connection attempts to multiple ports indicating reconnaissance.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "filters": [
+                    {"field": "packets_sent", "operator": "gte", "value": 100}
+                ],
+                "threshold": 20,
+                "timeframe": "5m",
+                "group_by": ["src_ip"]
+            },
+            "mitre_technique": ["T1595.001"],
+            "false_positive_notes": "Vulnerability scanners, network monitoring tools"
+        },
+        
+        # --- HTTP/Web Enhanced Rules ---
+        {
+            "rule_id": "SOC-HTTP-001",
+            "name": "Enhanced SQL Injection Detection",
+            "description": "Advanced SQLi patterns including UNION-based, boolean-based, and time-based injection.",
+            "severity": "critical",
+            "enabled": True,
+            "conditions": {
+                "log_source": "web_server",
+                "filters": [
+                    {"field": "query_string", "operator": "regex", "value": "(UNION.*SELECT|OR\\s+1\\s*=\\s*1|AND\\s+1\\s*=\\s*1|SLEEP\\s*\\(|BENCHMARK\\s*\\(|WAITFOR\\s+DELAY)"}
+                ]
+            },
+            "mitre_technique": ["T1190"],
+            "false_positive_notes": "Developer testing, security scanners"
+        },
+        {
+            "rule_id": "SOC-HTTP-002",
+            "name": "XSS Attack Pattern Detection",
+            "description": "Cross-site scripting attempt detection in URI and query parameters.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "log_source": "web_server",
+                "filters": [
+                    {"field": "query_string", "operator": "regex", "value": "(<script|javascript:|onerror\\s*=|onload\\s*=|<iframe|<svg.*onload)"}
+                ]
+            },
+            "mitre_technique": ["T1189"],
+            "false_positive_notes": "Web development, CMS editors with HTML content"
+        },
+        {
+            "rule_id": "SOC-HTTP-003",
+            "name": "Command Injection Attempt",
+            "description": "Detection of OS command injection patterns in web requests.",
+            "severity": "critical",
+            "enabled": True,
+            "conditions": {
+                "log_source": "web_server",
+                "filters": [
+                    {"field": "query_string", "operator": "regex", "value": "([;|&]\\s*(cat|ls|id|whoami|wget|curl|nc|netcat|bash|sh|cmd|powershell))"}
+                ]
+            },
+            "mitre_technique": ["T1059"],
+            "false_positive_notes": "API testing, legitimate shell command parameters"
+        },
+        {
+            "rule_id": "SOC-HTTP-004",
+            "name": "Directory Traversal Attack",
+            "description": "Path traversal attempts to access files outside webroot.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "log_source": "web_server",
+                "filters": [
+                    {"field": "uri", "operator": "regex", "value": "(\\.\\./|\\.\\.\\\\/etc/passwd|c:\\\\windows)"}
+                ]
+            },
+            "mitre_technique": ["T1083"],
+            "false_positive_notes": "Rare false positives, typically malicious"
+        },
+        {
+            "rule_id": "SOC-HTTP-005",
+            "name": "Abnormal 5xx Error Rate",
+            "description": "High rate of server errors indicating potential attack or system instability.",
+            "severity": "medium",
+            "enabled": True,
+            "conditions": {
+                "log_source": "web_server",
+                "filters": [
+                    {"field": "status_code", "operator": "gte", "value": 500}
+                ],
+                "threshold": 50,
+                "timeframe": "10m",
+                "group_by": ["hostname"]
+            },
+            "mitre_technique": ["T1499"],
+            "false_positive_notes": "Application bugs, deployment issues"
+        },
+        
+        # --- TLS/SSL Rules ---
+        {
+            "rule_id": "SOC-TLS-001",
+            "name": "Deprecated TLS Version Usage",
+            "description": "Detection of insecure TLS versions (TLS 1.0, 1.1, SSLv3).",
+            "severity": "medium",
+            "enabled": True,
+            "conditions": {
+                "filters": [
+                    {"field": "tls_version", "operator": "regex", "value": "(TLSv1\\.0|TLSv1\\.1|SSLv3|SSLv2)"}
+                ]
+            },
+            "mitre_technique": ["T1573.001"],
+            "false_positive_notes": "Legacy systems, IoT devices"
+        },
+        {
+            "rule_id": "SOC-TLS-002",
+            "name": "Suspicious Encrypted C2 Pattern",
+            "description": "Low-volume encrypted connections to unusual SNI with repeated patterns.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "filters": [
+                    {"field": "tls_version", "operator": "exists", "value": True},
+                    {"field": "bytes_sent", "operator": "lt", "value": 5000}
+                ],
+                "threshold": 15,
+                "timeframe": "1h",
+                "group_by": ["sni", "hostname"]
+            },
+            "mitre_technique": ["T1071.001", "T1573"],
+            "false_positive_notes": "Keep-alive connections, CDN health checks"
+        },
+        
+        # --- Authentication Enhanced Rules ---
+        {
+            "rule_id": "SOC-AUTH-003",
+            "name": "Enhanced Credential Stuffing Detection",
+            "description": "Multiple accounts targeted from single IP with alternating success/failure.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "filters": [
+                    {"field": "auth_status", "operator": "eq", "value": "failure"}
+                ],
+                "threshold": 10,
+                "timeframe": "10m",
+                "group_by": ["source_ip"],
+                "group_by_unique": ["username"]
+            },
+            "mitre_technique": ["T1110.004"],
+            "false_positive_notes": "Shared workstations, NAT environments"
+        },
+        {
+            "rule_id": "SOC-AUTH-004",
+            "name": "Lateral Movement Detection",
+            "description": "Single account authenticating to multiple hosts rapidly.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "filters": [
+                    {"field": "auth_status", "operator": "eq", "value": "success"},
+                    {"field": "login_type", "operator": "in", "value": ["Network", "RemoteInteractive", "ssh"]}
+                ],
+                "threshold": 5,
+                "timeframe": "15m",
+                "group_by": ["username"],
+                "group_by_unique": ["hostname"]
+            },
+            "mitre_technique": ["T1550", "T1021"],
+            "false_positive_notes": "IT administrators, deployment scripts"
+        },
+        {
+            "rule_id": "SOC-AUTH-005",
+            "name": "Impossible Travel Detection",
+            "description": "Same user logging in from geographically distant locations.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "filters": [
+                    {"field": "auth_status", "operator": "eq", "value": "success"}
+                ],
+                "threshold": 2,
+                "timeframe": "2h",
+                "group_by": ["username"],
+                "group_by_unique": ["geoip_country"]
+            },
+            "mitre_technique": ["T1078"],
+            "false_positive_notes": "VPN users, corporate proxies"
+        },
+        
+        # --- Endpoint Enhanced Rules ---
+        {
+            "rule_id": "SOC-EP-001",
+            "name": "Suspicious Parent-Child Process Chain",
+            "description": "Detection of unusual process spawning patterns indicative of exploitation.",
+            "severity": "high",
+            "enabled": True,
+            "conditions": {
+                "event_type": "process_creation",
+                "filters": [
+                    {"field": "parent_process", "operator": "regex", "value": "(winword|excel|powerpnt|outlook|iexplore|chrome|firefox)"},
+                    {"field": "process_name", "operator": "regex", "value": "(cmd|powershell|wscript|cscript|mshta|regsvr32)"}
+                ]
+            },
+            "mitre_technique": ["T1055", "T1059"],
+            "false_positive_notes": "Legitimate macros, browser plugins"
+        },
+        {
+            "rule_id": "SOC-EP-002",
+            "name": "Unsigned Binary Execution",
+            "description": "Execution of unsigned or invalidly signed binaries.",
+            "severity": "medium",
+            "enabled": True,
+            "conditions": {
+                "event_type": "process_creation",
+                "filters": [
+                    {"field": "signature_status", "operator": "neq", "value": "valid"}
+                ]
+            },
+            "mitre_technique": ["T1553.002"],
+            "false_positive_notes": "Development tools, open-source software"
+        },
+        {
+            "rule_id": "SOC-REG-001",
+            "name": "Registry Persistence Attempt",
+            "description": "Modification of registry Run keys or services for persistence.",
+            "severity": "critical",
+            "enabled": True,
+            "conditions": {
+                "event_code": 4657,
+                "filters": [
+                    {"field": "registry_key", "operator": "regex", "value": "(Run|RunOnce|Services|Winlogon|Shell)"}
+                ]
+            },
+            "mitre_technique": ["T1547.001", "T1543.003"],
+            "false_positive_notes": "Software installers, system updates"
         }
     ]
     

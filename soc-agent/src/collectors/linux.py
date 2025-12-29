@@ -125,12 +125,19 @@ class LinuxCollector(BaseCollector):
             client_ip = groups[0]
             timestamp_str = groups[1]
             method = groups[2]
-            uri = groups[3]
+            full_uri = groups[3]
             protocol = groups[4]
             status = int(groups[5])
             size = groups[6]
             referer = groups[7] if len(groups) > 7 else "-"
             user_agent = groups[8] if len(groups) > 8 else "-"
+            
+            # Parse query string from URI (enterprise telemetry)
+            if '?' in full_uri:
+                uri_path, query_string = full_uri.split('?', 1)
+            else:
+                uri_path = full_uri
+                query_string = None
             
             log_entry = {
                 "timestamp": timestamp_str,  # Will be normalized by sanitizer
@@ -142,7 +149,8 @@ class LinuxCollector(BaseCollector):
                 "event_type": "http_request",
                 "client_ip": client_ip,
                 "http_method": method,
-                "uri": uri,
+                "uri": uri_path,
+                "query_string": query_string,  # Separated from URI
                 "http_protocol": protocol,
                 "status_code": status,
                 "response_size": size,
@@ -151,8 +159,8 @@ class LinuxCollector(BaseCollector):
                 "message": line
             }
             
-            # Detect attacks
-            attack_detected = self._detect_web_attack_patterns(log_entry, method, uri, user_agent, status)
+            # Detect attacks using full_uri for pattern matching
+            attack_detected = self._detect_web_attack_patterns(log_entry, method, full_uri, user_agent, status)
             
             # Track request frequency for DDoS detection
             self._track_request_frequency(client_ip, log_entry)
@@ -323,6 +331,8 @@ class LinuxCollector(BaseCollector):
         if "Accepted" in line and ("publickey" in line or "password" in line):
             log_entry["event_type"] = "ssh_login_success"
             log_entry["alert_severity"] = "info"
+            log_entry["auth_status"] = "success"  # Normalized field
+            log_entry["login_type"] = "ssh"  # Normalized field
             
             # Extract username and IP
             user_match = re.search(r"Accepted \w+ for (\S+) from (\S+)", line)
@@ -342,6 +352,10 @@ class LinuxCollector(BaseCollector):
         elif "Failed password" in line:
             log_entry["event_type"] = "ssh_login_failure"
             log_entry["alert_severity"] = "medium"
+            log_entry["auth_status"] = "failure"  # Normalized field
+            log_entry["login_type"] = "ssh"  # Normalized field
+            log_entry["auth_method"] = "password"
+            log_entry["failure_reason"] = "invalid_password"
             
             # Extract username and IP
             user_match = re.search(r"Failed password for (\S+) from (\S+)", line)

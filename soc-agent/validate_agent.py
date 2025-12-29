@@ -77,7 +77,7 @@ def validate_file_structure():
     logging.info("Validating File Structure")
     logging.info("="*60)
     
-    base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    base_path = os.path.dirname(os.path.abspath(__file__))
     
     required_files = {
         'src/agent.py': 'Main Agent',
@@ -107,7 +107,7 @@ def validate_collectors():
     logging.info("Validating Collectors")
     logging.info("="*60)
     
-    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src'))
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
     
     collectors_ok = True
     
@@ -193,7 +193,7 @@ def validate_config():
     logging.info("Validating Configuration")
     logging.info("="*60)
     
-    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src'))
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
     
     try:
         from config import Config

@@ -22,6 +22,10 @@ class NetworkCollector(BaseCollector):
         self.bandwidth_threshold_mb = config.get_network_bandwidth_threshold()
         self.enable_process_attribution = config.get_enable_process_attribution()
         self._previous_net_io = None  # For tracking bandwidth deltas
+        
+        # Flow metrics tracking (enterprise telemetry)
+        self._connection_start_times = {}  # (local_ip, local_port, remote_ip, remote_port) -> start_time
+        self._last_io_counters = None  # For calculating delta packets/bytes
 
     def start(self):
         self.running = True
@@ -85,12 +89,18 @@ class NetworkCollector(BaseCollector):
                         "ip_address": self.ip_address,
                         "os_type": "Linux",
                         "log_source": "network_snapshot",
-                        "protocol": protocol,
+                        "protocol": protocol.upper(),
                         "src_ip": local_ip,
                         "src_port": local_port,
                         "dst_ip": remote_ip,
                         "dst_port": remote_port,
                         "status": status,
+                        # Network flow metrics (enterprise telemetry)
+                        "duration": self._get_connection_duration(local_ip, local_port, remote_ip, remote_port),
+                        "bytes_sent": None,  # Per-connection bytes not available from /proc/net
+                        "bytes_received": None,
+                        "packets_sent": None,
+                        "packets_received": None,
                         "message": f"Network Connection: {protocol.upper()} {local_ip}:{local_port} -> {remote_ip}:{remote_port} [{status}]"
                     }
                     self.send_log(log['message'], log)
@@ -108,6 +118,19 @@ class NetworkCollector(BaseCollector):
             return ip, port
         except:
             return "0.0.0.0", 0
+    
+    def _get_connection_duration(self, local_ip, local_port, remote_ip, remote_port):
+        """Track connection duration for flow metrics"""
+        conn_key = (local_ip, local_port, remote_ip, remote_port)
+        current_time = time.time()
+        
+        if conn_key not in self._connection_start_times:
+            # New connection, start tracking
+            self._connection_start_times[conn_key] = current_time
+            return 0.0
+        else:
+            # Return duration since first seen
+            return round(current_time - self._connection_start_times[conn_key], 2)
 
     def _collect_windows(self):
         # Use netstat via subprocess
@@ -146,6 +169,12 @@ class NetworkCollector(BaseCollector):
                     "dst_ip": r_ip,
                     "dst_port": r_port,
                     "status": state,
+                    # Network flow metrics (enterprise telemetry)
+                    "duration": self._get_connection_duration(l_ip, l_port, r_ip, r_port),
+                    "bytes_sent": None,
+                    "bytes_received": None,
+                    "packets_sent": None,
+                    "packets_received": None,
                     "message": f"Network Connection: TCP {l_ip}:{l_port} -> {r_ip}:{r_port} [{state}]"
                 }
                 self.send_log(log['message'], log)

@@ -247,12 +247,29 @@ class WindowsCollector(BaseCollector):
                 if "sub_status" not in log_entry and "Sub Status:" in line:
                     log_entry["sub_status"] = line.split(":", 1)[1].strip()
         
-        # Tag event type
+        # Tag event type - normalized auth fields
         if event_id == 4624:
             log_entry["auth_result"] = "success"
+            log_entry["auth_status"] = "success"  # Normalized field
         elif event_id == 4625:
             log_entry["auth_result"] = "failure"
+            log_entry["auth_status"] = "failure"  # Normalized field
             log_entry["alert_severity"] = "medium"
+        
+        # Add normalized auth_method based on logon_type
+        logon_type_code = log_entry.get("logon_type_code", "")
+        if logon_type_code in ["3", "8"]:
+            log_entry["auth_method"] = "network"
+        elif logon_type_code in ["2", "10", "11"]:
+            log_entry["auth_method"] = "interactive"
+        elif logon_type_code in ["4", "5"]:
+            log_entry["auth_method"] = "service"
+        else:
+            log_entry["auth_method"] = "other"
+        
+        # Copy logon_type to login_type for schema consistency
+        if "logon_type" in log_entry:
+            log_entry["login_type"] = log_entry["logon_type"]
     
     def _parse_firewall_event(self, log_entry, event, msg):
         """Parse firewall blocking events"""
