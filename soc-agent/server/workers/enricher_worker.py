@@ -103,7 +103,7 @@ class EnricherWorker:
                     except Exception as e:
                         self.logger.error(f"Error enriching log {log['_id']}: {e}")
                         # Mark as enriched anyway to avoid reprocessing
-                        self.db.raw_logs.update_one(
+                        self.db.raw_logs.update_many(
                             {"_id": log["_id"]},
                             {"$set": {"enriched": True, "enrichment_error": str(e)}}
                         )
@@ -128,7 +128,7 @@ class EnricherWorker:
                 self.logger.debug(f"Enriched {source_ip}: {geo_data.get('country')}, {geo_data.get('city')}")
         
         # Update log with enriched data
-        self.db.raw_logs.update_one(
+        self.db.raw_logs.update_many(
             {"_id": log["_id"]},
             {"$set": {
                 "parsed_data": parsed,

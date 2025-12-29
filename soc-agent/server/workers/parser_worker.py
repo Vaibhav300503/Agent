@@ -50,7 +50,7 @@ class ParserWorker:
                     except Exception as e:
                         self.logger.error(f"Error processing log {raw_log['_id']}: {e}", exc_info=True)
                         # Mark as processed with error
-                        self.db.raw_logs.update_one(
+                        self.db.raw_logs.update_many(
                             {"_id": raw_log["_id"]},
                             {"$set": {"processed": True, "parse_error": str(e)}}
                         )
@@ -76,7 +76,7 @@ class ParserWorker:
             }
         
         # Store parsed data inline in raw_log document
-        self.db.raw_logs.update_one(
+        self.db.raw_logs.update_many(
             {"_id": raw_log["_id"]},
             {"$set": {
                 "parsed_data": parsed,

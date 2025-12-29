@@ -260,7 +260,7 @@ class DetectorWorker:
                     except Exception as e:
                         self.logger.error(f"Error checking log {log['_id']}: {e}")
                         # Mark as checked anyway
-                        self.db.raw_logs.update_one(
+                        self.db.raw_logs.update_many(
                             {"_id": log["_id"]},
                             {"$set": {"rule_checked": True}}
                         )
@@ -274,7 +274,7 @@ class DetectorWorker:
         alert = self.engine.check_log(log)
         
         # Mark as checked
-        self.db.raw_logs.update_one(
+        self.db.raw_logs.update_many(
             {"_id": log["_id"]},
             {"$set": {"rule_checked": True}}
         )

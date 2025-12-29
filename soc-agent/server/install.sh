@@ -340,21 +340,19 @@ if "raw_logs" in db.list_collection_names():
 
 print("Creating optimized collections...")
 
-# 1. raw_logs (Time-Series)
+# 1. raw_logs (Standard Collection - Time-Series doesn't support the updates required by workers)
 if "raw_logs" not in db.list_collection_names():
-    db.create_collection("raw_logs", timeseries={
-        "timeField": "timestamp",
-        "metaField": "metadata",
-        "granularity": "minutes"
-    })
-    # Set retention: 30 days
-    db.command("collMod", "raw_logs", expireAfterSeconds=2592000)
+    db.create_collection("raw_logs")
+    # Set retention: 30 days via TTL index
+    db.raw_logs.create_index("timestamp", expireAfterSeconds=2592000)
 
 # 2. Add indexes to raw_logs
 db.raw_logs.create_index([("metadata.hostname", ASCENDING), ("timestamp", DESCENDING)])
 db.raw_logs.create_index([("metadata.agent_id", ASCENDING)])
 db.raw_logs.create_index([("processed", ASCENDING)])
 db.raw_logs.create_index([("has_alert", ASCENDING)])
+db.raw_logs.create_index([("enriched", ASCENDING)])
+db.raw_logs.create_index([("rule_checked", ASCENDING)])
 
 # 3. alerts (Standard)
 db.alerts.create_index("alert_id", unique=True)
