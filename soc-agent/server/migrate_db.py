@@ -27,35 +27,40 @@ def migrate_database():
                     coll_info["cursor"]["firstBatch"][0]["type"] == "timeseries"
     
     if not is_timeseries:
-        print(f"✓ Collection '{coll_name}' is already a standard collection. Migration already done.")
-        return
+        print(f"✓ Collection '{coll_name}' is already a standard collection.")
+    else:
+        print(f"! Detected '{coll_name}' is a Time-Series collection. Starting migration...")
 
-    print(f"! Detected '{coll_name}' is a Time-Series collection. Starting migration...")
-
-    # 2. Backup existing logs
-    temp_coll_name = "raw_logs_temp_backup"
-    print(f"Backing up logs to '{temp_coll_name}'...")
-    if temp_coll_name in db.list_collection_names():
-        db.drop_collection(temp_coll_name)
-    
-    # Use aggregation to copy data
-    db.command("aggregate", coll_name, pipeline=[{"$out": temp_coll_name}], cursor={})
-    
-    # 3. Drop Time-Series collection
-    print(f"Dropping Time-Series collection '{coll_name}'...")
-    db.drop_collection(coll_name)
-    
-    # 4. Recreate as Standard Collection
-    print(f"Recreating '{coll_name}' as a standard collection...")
-    db.create_collection(coll_name)
-    
-    # 5. Restore data
-    print("Restoring data...")
-    db.command("aggregate", temp_coll_name, pipeline=[{"$out": coll_name}], cursor={})
+        # 2. Backup existing logs
+        temp_coll_name = "raw_logs_temp_backup"
+        print(f"Backing up logs to '{temp_coll_name}'...")
+        if temp_coll_name in db.list_collection_names():
+            db.drop_collection(temp_coll_name)
+        
+        # Use aggregation to copy data
+        db.command("aggregate", coll_name, pipeline=[{"$out": temp_coll_name}], cursor={})
+        
+        # 3. Drop Time-Series collection
+        print(f"Dropping Time-Series collection '{coll_name}'...")
+        db.drop_collection(coll_name)
+        
+        # 4. Recreate as Standard Collection
+        print(f"Recreating '{coll_name}' as a standard collection...")
+        db.create_collection(coll_name)
+        
+        # 5. Restore data
+        print("Restoring data...")
+        db.command("aggregate", temp_coll_name, pipeline=[{"$out": coll_name}], cursor={})
     
     # 6. Re-apply indexes (crucial for performance)
     print("Re-applying indexes...")
-    db[coll_name].create_index("timestamp")
+    # Drop existing indexes on the same keys to avoid conflicts (except _id)
+    try:
+        db[coll_name].drop_index("timestamp_1")
+    except:
+        pass
+
+    # Create TTL index (this also serves as a normal index for the timestamp field)
     db[coll_name].create_index("timestamp", expireAfterSeconds=2592000) # 30-day TTL
     db[coll_name].create_index([("metadata.hostname", 1), ("timestamp", -1)])
     db[coll_name].create_index([("metadata.agent_id", 1)])
