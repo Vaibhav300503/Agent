@@ -261,3 +261,222 @@ def sanitize_and_normalize(log_entry: Dict[str, Any]) -> Dict[str, Any]:
     log_entry = DataSanitizer.sanitize_log_entry(log_entry)
     
     return log_entry
+
+
+class LogEnricher:
+    """
+    Enriches log entries with standardized metadata fields for dashboard compatibility
+    """
+    
+    @staticmethod
+    def normalize_severity(log_entry: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Normalize severity to standard levels: Low, Medium, High, Critical
+        
+        Handles:
+        - Windows Event Log severity (integer EventType codes)
+        - Linux alert_severity (string values)
+        - HTTP status codes
+        - Event type inference
+        
+        Args:
+            log_entry: Log entry dictionary
+        
+        Returns:
+            Log entry with added 'severity_level' field
+        """
+        # Windows Event Log severity (EventType)
+        if 'severity' in log_entry and isinstance(log_entry['severity'], int):
+            win_severity_map = {
+                1: "Medium",    # Error
+                2: "Low",       # Warning
+                3: "Low",       # Information
+                4: "Low",       # Information Success
+                5: "Low"        # Information Failure
+            }
+            log_entry['severity_level'] = win_severity_map.get(log_entry['severity'], "Low")
+            log_entry['severity_original'] = log_entry['severity']  # Keep original
+        
+        # Linux alert_severity (string)
+        elif 'alert_severity' in log_entry:
+            alert_map = {
+                "critical": "Critical",
+                "high": "High",
+                "medium": "Medium",
+                "low": "Low",
+                "info": "Low"
+            }
+            severity_str = str(log_entry['alert_severity']).lower()
+            log_entry['severity_level'] = alert_map.get(severity_str, "Low")
+        
+        # HTTP status codes
+        elif 'status_code' in log_entry:
+            status = log_entry['status_code']
+            if status >= 500:
+                log_entry['severity_level'] = "High"
+            elif status in [401, 403, 404]:
+                log_entry['severity_level'] = "Medium"
+            elif status >= 400:
+                log_entry['severity_level'] = "Medium"
+            else:
+                log_entry['severity_level'] = "Low"
+        
+        # Infer from event_type
+        elif 'event_type' in log_entry:
+            event_type = str(log_entry['event_type']).lower()
+            
+            # Critical events
+            if any(keyword in event_type for keyword in ['malware', 'ransomware', 'breach', 'exploit']):
+                log_entry['severity_level'] = "Critical"
+            
+            # High severity events
+            elif any(keyword in event_type for keyword in ['port_scan', 'sql_injection', 'xss', 
+                                                           'path_traversal', 'zone_transfer', 
+                                                           'bruteforce', 'dos', 'unauthorized_access']):
+                log_entry['severity_level'] = "High"
+            
+            # Medium severity events
+            elif any(keyword in event_type for keyword in ['failure', 'invalid', 'denied', 'blocked', 
+                                                           'error', 'abnormal', 'suspicious']):
+                log_entry['severity_level'] = "Medium"
+            
+            # Low severity (informational)
+            else:
+                log_entry['severity_level'] = "Low"
+        
+        # Default
+        else:
+            log_entry['severity_level'] = "Low"
+        
+        return log_entry
+    
+    @staticmethod
+    def categorize_log(log_entry: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Add high-level log_category field based on log_source
+        
+        Categories: Security, Application, Network, System
+        
+        Args:
+            log_entry: Log entry dictionary
+        
+        Returns:
+            Log entry with added 'log_category' and 'log_type' fields
+        """
+        log_source = str(log_entry.get('log_source', '')).lower()
+        event_type = str(log_entry.get('event_type', '')).lower()
+        
+        # Security category
+        if any(keyword in log_source for keyword in ['auth', 'firewall', 'defender', 'malware', 
+                                                      'security', 'fim', 'antivirus', 'intrusion',
+                                                      'access_control', 'encryption']):
+            log_entry['log_category'] = "Security"
+        
+        # Application category
+        elif any(keyword in log_source for keyword in ['web', 'database', 'dns', 'application', 
+                                                        'http', 'api', 'service']):
+            log_entry['log_category'] = "Application"
+        
+        # Network category
+        elif any(keyword in log_source for keyword in ['network', 'tailscale', 'connection', 
+                                                        'vpn', 'router', 'switch', 'firewall']):
+            log_entry['log_category'] = "Network"
+        
+        # System category
+        elif any(keyword in log_source for keyword in ['kernel', 'syslog', 'system', 'boot', 
+                                                        'hardware', 'driver', 'os']):
+            log_entry['log_category'] = "System"
+        
+        # Fallback: Categorize based on event_type
+        elif event_type:
+            if any(keyword in event_type for keyword in ['login', 'auth', 'sudo', 'firewall', 
+                                                          'malware', 'attack', 'intrusion', 'breach']):
+                log_entry['log_category'] = "Security"
+            elif any(keyword in event_type for keyword in ['http', 'request', 'query', 'response']):
+                log_entry['log_category'] = "Application"
+            elif any(keyword in event_type for keyword in ['connection', 'network', 'packet']):
+                log_entry['log_category'] = "Network"
+            else:
+                log_entry['log_category'] = "System"
+        
+        # Default
+        else:
+            log_entry['log_category'] = "System"
+        
+        # Add detailed log_type (alias for log_source for backward compatibility)
+        log_entry['log_type'] = log_entry.get('log_source', 'unknown')
+        
+        return log_entry
+    
+    @staticmethod
+    def enrich_metadata(log_entry: Dict[str, Any], config=None) -> Dict[str, Any]:
+        """
+        Enrich log entry with source and destination metadata
+        
+        Args:
+            log_entry: Log entry dictionary
+            config: Optional config object with server_url
+        
+        Returns:
+            Log entry with added 'source' and 'destination' fields
+        """
+        # Add source field (endpoint/service that generated the log)
+        if 'source' not in log_entry:
+            hostname = log_entry.get('hostname', 'unknown')
+            log_source = log_entry.get('log_source', '')
+            
+            # Create hierarchical source identifier
+            if log_source:
+                # Capitalize log_source for readability
+                source_name = log_source.replace('_', ' ').title().replace(' ', '')
+                log_entry['source'] = f"{hostname}/{source_name}"
+            else:
+                log_entry['source'] = hostname
+        
+        # Add destination field (SOC server receiving the logs)
+        if 'destination' not in log_entry and config:
+            from urllib.parse import urlparse
+            try:
+                server_url = getattr(config, 'server_url', None)
+                if server_url:
+                    parsed_url = urlparse(server_url)
+                    log_entry['destination'] = parsed_url.hostname or "soc-server"
+                    log_entry['destination_endpoint'] = server_url
+                else:
+                    log_entry['destination'] = "soc-server"
+            except Exception:
+                log_entry['destination'] = "soc-server"
+        elif 'destination' not in log_entry:
+            log_entry['destination'] = "soc-server"
+        
+        return log_entry
+
+
+def enrich_log(log_entry: Dict[str, Any], config=None) -> Dict[str, Any]:
+    """
+    Complete log enrichment pipeline: sanitize, normalize, and enrich
+    
+    This function applies all transformations needed to make logs dashboard-ready:
+    1. Timestamp normalization
+    2. Data sanitization
+    3. Severity standardization
+    4. Log categorization
+    5. Metadata enrichment (source/destination)
+    
+    Args:
+        log_entry: Raw log entry dictionary
+        config: Optional config object with server_url
+    
+    Returns:
+        Fully enriched log entry ready for ingestion
+    """
+    # Sanitize and normalize (existing function)
+    log_entry = sanitize_and_normalize(log_entry)
+    
+    # Enrich with standardized fields
+    log_entry = LogEnricher.normalize_severity(log_entry)
+    log_entry = LogEnricher.categorize_log(log_entry)
+    log_entry = LogEnricher.enrich_metadata(log_entry, config)
+    
+    return log_entry
+

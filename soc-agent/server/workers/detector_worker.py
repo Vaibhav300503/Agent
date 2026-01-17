@@ -25,9 +25,12 @@ class SimpleRuleEngine:
         self.load_rules()
     
     def load_rules(self):
-        """Load enabled rules from MongoDB"""
-        self.rules = list(self.db.rules.find({"enabled": True}))
-        self.logger.info(f"Loaded {len(self.rules)} detection rules")
+        """Load enabled rules from MongoDB, sorted by priority (lower number = higher priority)"""
+        self.rules = list(
+            self.db.rules.find({"enabled": True, "category": "detection"})
+            .sort([("priority", 1), ("rule_id", 1)])  # Sort by priority, then rule_id
+        )
+        self.logger.info(f"Loaded {len(self.rules)} detection rules (sorted by priority)")
     
     def check_log(self, raw_log):
         """Check if log matches any rule"""

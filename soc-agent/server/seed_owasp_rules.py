@@ -17,6 +17,8 @@ def seed_rules():
             "name": "Lateral Movement - Explicit Credentials",
             "description": "Detection of Event ID 4648 indicating logon using explicit credentials across different servers.",
             "severity": "high",
+            "priority": 27,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_code": 4648,
@@ -31,6 +33,8 @@ def seed_rules():
             "name": "Unauthorized Object Access Attempts",
             "description": "Multiple attempts to access objects with WRITE/DELETE masks (Event ID 4663).",
             "severity": "medium",
+            "priority": 31,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_code": 4663,
@@ -48,6 +52,8 @@ def seed_rules():
             "name": "Unauthorized Privilege Grant Attempt",
             "description": "User right assigned or Access rights granted by non-admin (Event 4704/4717).",
             "severity": "critical",
+            "priority": 2,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_code": [4704, 4717],
@@ -64,7 +70,9 @@ def seed_rules():
             "name": "SQL Injection Attempt",
             "description": "Detection of common SQL injection patterns in HTTP request data.",
             "severity": "critical",
-            "enabled": True,
+            "priority": 9,
+            "category": "detection",
+            "enabled": False,
             "conditions": {
                 "filters": [
                     {"field": "message", "operator": "regex", "value": "(UNION.*SELECT)|(OR\\s+1\\s*=\\s*1)|(EXEC\\b)|(DROP\\b)|('\\s*;\\s*--)"}
@@ -77,6 +85,8 @@ def seed_rules():
             "name": "OS Command Injection Attempt",
             "description": "Detection of shell metacharacters and commands in HTTP parameters.",
             "severity": "critical",
+            "priority": 10,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -92,6 +102,8 @@ def seed_rules():
             "name": "Brute-Force Login Attempt",
             "description": "High volume of failed login attempts from a single source.",
             "severity": "high",
+            "priority": 12,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_code": 4625,
@@ -106,6 +118,8 @@ def seed_rules():
             "name": "Credential Stuffing Signature",
             "description": "Login attempts to many different accounts from a single IP.",
             "severity": "medium",
+            "priority": 32,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_code": 4625,
@@ -123,6 +137,8 @@ def seed_rules():
             "name": "Insecure Deserialization Attempt",
             "description": "Detection of Java/Python serialization markers in HTTP traffic.",
             "severity": "critical",
+            "priority": 5,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -138,6 +154,8 @@ def seed_rules():
             "name": "Scheduled Task Creation (Persistence)",
             "description": "A new scheduled task was created, often used for persistence.",
             "severity": "high",
+            "priority": 21,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_code": 4698,
@@ -152,6 +170,8 @@ def seed_rules():
             "name": "Service Binary Path Modification",
             "description": "Modification of a service's executable path in the registry.",
             "severity": "critical",
+            "priority": 3,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_code": 4657,
@@ -169,6 +189,8 @@ def seed_rules():
             "name": "Unauthorized sudoers Modification",
             "description": "Modification of the /etc/sudoers file by a non-root user.",
             "severity": "critical",
+            "priority": 4,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -185,6 +207,8 @@ def seed_rules():
             "name": "Unusual 404 Error Count",
             "description": "Possible directory brute-force or scanning activity.",
             "severity": "low",
+            "priority": 61,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [{"field": "status_code", "operator": "eq", "value": 404}],
@@ -199,6 +223,8 @@ def seed_rules():
             "name": "Scripting User-Agent Usage",
             "description": "Detection of automated scripting tools (curl, wget).",
             "severity": "low",
+            "priority": 62,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -212,6 +238,8 @@ def seed_rules():
             "name": "Access to Sensitive Web Patterns",
             "description": "Attempts to access .env, config, or .git directories.",
             "severity": "low",
+            "priority": 63,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -225,6 +253,8 @@ def seed_rules():
             "name": "Clearing Bash History",
             "description": "User attempting to hide traces by clearing bash history.",
             "severity": "low",
+            "priority": 64,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -238,6 +268,8 @@ def seed_rules():
             "name": "Account Created and Group Added",
             "description": "New account created and immediately added to a group (suspicious behavior).",
             "severity": "low",
+            "priority": 65,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_code": [4720, 4728],
@@ -252,6 +284,8 @@ def seed_rules():
             "name": "Password Policy Change",
             "description": "Modification of domain or local password policy.",
             "severity": "low",
+            "priority": 66,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_code": 4739
@@ -263,6 +297,8 @@ def seed_rules():
             "name": "Unusual Remote Login Time",
             "description": "Login activity outside of normal business hours (8 AM - 6 PM).",
             "severity": "low",
+            "priority": 67,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_code": [4624, "ssh_successful_login"],
@@ -279,6 +315,8 @@ def seed_rules():
             "name": "High DNS Query Volume",
             "description": "Large number of DNS queries from a single source, potential tunneling.",
             "severity": "low",
+            "priority": 68,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [{"field": "protocol", "operator": "eq", "value": "DNS"}],
@@ -293,6 +331,8 @@ def seed_rules():
             "name": "PING Command on Sensitive Systems",
             "description": "Use of ping for internal reconnaissance from a web server.",
             "severity": "low",
+            "priority": 69,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -307,6 +347,8 @@ def seed_rules():
             "name": "Base64 in Command Line",
             "description": "Detection of base64 strings in process command lines, common for obfuscation.",
             "severity": "low",
+            "priority": 70,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -321,6 +363,8 @@ def seed_rules():
             "name": "High Bandwidth Anomaly",
             "description": "Detection of significant spikes in network bandwidth, potentially indicating data exfiltration or DDoS.",
             "severity": "high",
+            "priority": 26,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_type": "traffic_anomaly",
@@ -335,6 +379,8 @@ def seed_rules():
             "name": "Potential Port Scan Detected",
             "description": "Heuristic detection of multiple unique ports blocked from a single source IP.",
             "severity": "high",
+            "priority": 16,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_type": "port_scan_detected",
@@ -348,6 +394,8 @@ def seed_rules():
             "name": "Ransomware Canary Alert",
             "description": "Modification or deletion of a FIM Canary file, strongly indicating ransomware activity.",
             "severity": "critical",
+            "priority": 1,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_type": "canary_file_alert"
@@ -359,6 +407,8 @@ def seed_rules():
             "name": "Malware Detection Alert",
             "description": "Threat identified by endpoint antivirus (Windows Defender).",
             "severity": "high",
+            "priority": 11,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_type": "malware_detection",
@@ -372,6 +422,8 @@ def seed_rules():
             "name": "Database Authentication Brute Force",
             "description": "Multiple failed database login attempts from a single source.",
             "severity": "high",
+            "priority": 22,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_type": "authentication_failure",
@@ -387,6 +439,8 @@ def seed_rules():
             "name": "Web Infrastructure DoS Attempt",
             "description": "High frequency of web requests from a single client indicating potential DoS.",
             "severity": "high",
+            "priority": 23,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_type": "high_request_frequency",
@@ -405,6 +459,8 @@ def seed_rules():
             "name": "Data Exfiltration - High Bytes Sent",
             "description": "Unusually high bytes_sent from single endpoint indicating potential data exfiltration.",
             "severity": "high",
+            "priority": 17,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "log_source": "network_bandwidth",
@@ -424,6 +480,8 @@ def seed_rules():
             "name": "Beaconing Detection - Periodic Low Volume Traffic",
             "description": "Detection of periodic C2 beaconing patterns with consistent timing intervals.",
             "severity": "medium",
+            "priority": 35,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "log_source": "network_snapshot",
@@ -443,7 +501,9 @@ def seed_rules():
             "name": "Port Scan - High Packet Rate",
             "description": "Rapid connection attempts to multiple ports indicating reconnaissance.",
             "severity": "high",
-            "enabled": True,
+            "priority": 18,
+            "category": "detection",
+            "enabled": False,
             "conditions": {
                 "filters": [
                     {"field": "packets_sent", "operator": "gte", "value": 100}
@@ -462,6 +522,8 @@ def seed_rules():
             "name": "Enhanced SQL Injection Detection",
             "description": "Advanced SQLi patterns including UNION-based, boolean-based, and time-based injection.",
             "severity": "critical",
+            "priority": 8,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "log_source": "web_server",
@@ -477,6 +539,8 @@ def seed_rules():
             "name": "XSS Attack Pattern Detection",
             "description": "Cross-site scripting attempt detection in URI and query parameters.",
             "severity": "high",
+            "priority": 19,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "log_source": "web_server",
@@ -492,6 +556,8 @@ def seed_rules():
             "name": "Command Injection Attempt",
             "description": "Detection of OS command injection patterns in web requests.",
             "severity": "critical",
+            "priority": 7,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "log_source": "web_server",
@@ -507,6 +573,8 @@ def seed_rules():
             "name": "Directory Traversal Attack",
             "description": "Path traversal attempts to access files outside webroot.",
             "severity": "high",
+            "priority": 20,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "log_source": "web_server",
@@ -522,6 +590,8 @@ def seed_rules():
             "name": "Abnormal 5xx Error Rate",
             "description": "High rate of server errors indicating potential attack or system instability.",
             "severity": "medium",
+            "priority": 33,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "log_source": "web_server",
@@ -542,6 +612,8 @@ def seed_rules():
             "name": "Deprecated TLS Version Usage",
             "description": "Detection of insecure TLS versions (TLS 1.0, 1.1, SSLv3).",
             "severity": "medium",
+            "priority": 34,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -556,6 +628,8 @@ def seed_rules():
             "name": "Suspicious Encrypted C2 Pattern",
             "description": "Low-volume encrypted connections to unusual SNI with repeated patterns.",
             "severity": "high",
+            "priority": 25,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -576,6 +650,8 @@ def seed_rules():
             "name": "Enhanced Credential Stuffing Detection",
             "description": "Multiple accounts targeted from single IP with alternating success/failure.",
             "severity": "high",
+            "priority": 13,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -594,6 +670,8 @@ def seed_rules():
             "name": "Lateral Movement Detection",
             "description": "Single account authenticating to multiple hosts rapidly.",
             "severity": "high",
+            "priority": 14,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -613,6 +691,8 @@ def seed_rules():
             "name": "Impossible Travel Detection",
             "description": "Same user logging in from geographically distant locations.",
             "severity": "high",
+            "priority": 15,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "filters": [
@@ -633,6 +713,8 @@ def seed_rules():
             "name": "Suspicious Parent-Child Process Chain",
             "description": "Detection of unusual process spawning patterns indicative of exploitation.",
             "severity": "high",
+            "priority": 24,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_type": "process_creation",
@@ -649,6 +731,8 @@ def seed_rules():
             "name": "Unsigned Binary Execution",
             "description": "Execution of unsigned or invalidly signed binaries.",
             "severity": "medium",
+            "priority": 36,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_type": "process_creation",
@@ -664,6 +748,8 @@ def seed_rules():
             "name": "Registry Persistence Attempt",
             "description": "Modification of registry Run keys or services for persistence.",
             "severity": "critical",
+            "priority": 6,
+            "category": "detection",
             "enabled": True,
             "conditions": {
                 "event_code": 4657,

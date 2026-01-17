@@ -20,13 +20,14 @@ class BaseCollector(ABC):
 
     def send_log(self, raw_data, normalized_data):
         """
-        Standardize, sanitize, and send log to transport
+        Standardize, sanitize, enrich, and send log to transport
         
         This method:
-        1. Inject mandatory identification fields (ip_address, hostname)
+        1. Injects mandatory identification fields (ip_address, hostname)
         2. Normalizes timestamps to ISO 8601
         3. Sanitizes data to prevent SQL injection in backend
-        4. Buffers log for transmission
+        4. Enriches with standardized metadata (source, destination, severity_level, log_category)
+        5. Buffers log for transmission
         """
         try:
             # Ensure mandatory fields are present for backend identification
@@ -36,18 +37,23 @@ class BaseCollector(ABC):
             if 'hostname' not in normalized_data or not normalized_data['hostname']:
                 normalized_data['hostname'] = getattr(self, 'hostname', 'unknown')
 
-            # Import sanitizer (lazy import to avoid circular dependencies)
-            from sanitizer import sanitize_and_normalize
+            # Import enrichment function (lazy import to avoid circular dependencies)
+            from sanitizer import enrich_log
             
-            # Sanitize and normalize the log entry
-            safe_data = sanitize_and_normalize(normalized_data)
+            # Apply complete enrichment pipeline:
+            # - Sanitize and normalize (timestamps, data validation)
+            # - Add severity_level (standardized severity)
+            # - Add log_category (Security, Application, Network, System)
+            # - Add source and destination metadata
+            safe_data = enrich_log(normalized_data, self.config)
             
             # Send to transport
             self.transport.buffer_log(safe_data)
             
         except Exception as e:
-            self.logger.error(f"Error sanitizing log: {e}")
-            # Fallback: send original data if sanitization fails
+            self.logger.error(f"Error enriching log: {e}")
+            # Fallback: send original data if enrichment fails
             self.transport.buffer_log(normalized_data)
+
 
 
