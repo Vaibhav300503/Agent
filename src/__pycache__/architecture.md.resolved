@@ -1,0 +1,78 @@
+# SOC Platform Architecture
+This document outlines the architecture and data flow of the Security Operations Center (SOC) agent/server platform.
+
+## System Overview
+The system is designed as a centralized log ingestion and analysis platform. Agents deployed on endpoints (Windows/Linux) collect logs and transmit them to a central server. The server ingests, parses, enriches, and analyzes these logs to detect security threats.
+
+## High-Level Architecture
+```mermaid
+graph TD
+    Client["Agent Endpoint"] -->|HTTP POST JSON| API["Ingest API (FastAPI)"]
+    
+    subgraph "SOC Server"
+        API -->|Insert| Mongo[("MongoDB")]
+        
+        subgraph "Background Workers"
+            Parser["Parser Worker"]
+            Enricher["Enricher Worker"]
+            Detector["Detector Worker"]
+            TheHive["TheHive Worker"]
+        end
+        
+        Mongo -->|Read Unprocessed| Parser
+        Parser -->|Update Parsed| Mongo
+        
+        Mongo -->|Read Parsed| Enricher
+        Enricher -->|Update GeoIP| Mongo
+        
+        Mongo -->|Read Enriched| Detector
+        Detector <-->|State/Counters| Redis[("Redis")]
+        Detector -->|Create Alert| Mongo
+        
+        Mongo -->|Read Alerts| TheHive
+    end
+    
+    TheHive -->|Create Case| ExtHive["TheHive Instance (Optional)"]
+```
+
+## Data Flow Pipeline
+
+1.  **Ingestion Layer** ([server/api/ingest.py](file:///c:/Users/INDIA%20TECHNOLOGY/Desktop/script/soc-agent/server/api/ingest.py))
+    *   **Protocol**: REST API (FastAPI).
+    *   **Authentication**: Bearer Token.
+    *   **Action**: Receives log batches from agents.
+    *   **Storage**: Immediately writes raw logs to MongoDB `raw_logs` collection with `processed: False`.
+    *   **Rate Limiting**: Protected by `slowapi` (default 2000/min).
+
+2.  **Processing Layer** (Background Workers in [server/main.py](file:///c:/Users/INDIA%20TECHNOLOGY/Desktop/script/soc-agent/server/main.py))
+    *   **Parser Worker**:
+        *   Polls MongoDB for `processed: False` logs.
+        *   Normalizes log formats (e.g., standardizing timestamps, severity).
+    *   **Enricher Worker**:
+        *   Adds context to logs, specifically GeoIP data for IP addresses using MaxMind DB.
+    *   **Detector Worker**:
+        *   Evaluates logs against detection rules (stored in `rules` collection).
+        *   Uses **Redis** for stateful detection (e.g., counting failed logins within a 5-minute window).
+        *   Generates an entry in the `alerts` collection if a rule is triggered.
+
+3.  **Response Layer**
+    *   **TheHive Worker**:
+        *   Monitors `alerts` collection.
+        *   Forwards high-severity alerts to an external **TheHive** instance for incident management.
+
+## Key Components
+
+| Component | Technology | Purpose |
+| :--- | :--- | :--- |
+| **API Server** | Python (FastAPI, Uvicorn) | Entry point for agents, handles authentication and raw storage. |
+| **Database** | MongoDB | Primary store for Logs, Alerts, Rules, and Agent status. |
+| **Cache/State** | Redis | High-speed counter store for detection rules (e.g., thresholds). |
+| **Workers** | Python (Threading) | dedicated threads for parsing, enriching, and detecting. |
+| **Agent** | Python/PyInstaller | Endpoint collector (Service on Windows/Linux). |
+
+## Database Collections
+*   `raw_logs`: Stores all incoming log events.
+*   `agents`: Tracks agent heartbeats (Status, IP, Version).
+*   `alerts`: Generated security alerts from the Detector.
+*   `rules`: Detection logic definitions (e.g., SIGMA-like rules).
+*   `cases`: Tracking of alerts sent to external systems.
