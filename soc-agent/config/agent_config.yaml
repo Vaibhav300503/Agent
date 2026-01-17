@@ -1,0 +1,68 @@
+server:
+  url: "https://carmela-unpublished-lou.ngrok-free.dev/api/v1/logs"
+  api_token: "Server@123"
+  verify_ssl: true
+  timeout_sec: 10
+
+agent:
+  polling_interval_sec: 120
+  buffer_path: "agent_buffer.db"
+  max_buffer_size_mb: 100
+  log_level: "INFO"
+
+logs:
+  windows_events:
+    - "Security"
+    - "System"
+    - "Application"
+    - "Microsoft-Windows-Windows Firewall With Advanced Security/Firewall"
+    - "Microsoft-Windows-Windows Defender/Operational"
+  
+  # Linux paths
+  linux_files:
+    - "/var/log/syslog"
+    - "/var/log/auth.log"
+    - "/var/log/secure"
+    - "/var/log/messages"
+    - "/var/log/kern.log"
+  
+  # Web server logs for WAF-style detection
+  web_server_logs:
+    - "/var/log/nginx/access.log"
+    - "/var/log/apache2/access.log"
+  
+  # Database logs for breach detection
+  database_logs:
+    - "/var/log/mysql/error.log"
+    - "/var/log/postgresql/postgresql-*.log"
+  
+  # DNS logs
+  dns_logs:
+    - "/var/log/named/security.log"
+    - "/var/log/named/query.log"
+
+network:
+  enabled: true
+  interval_sec: 60
+  snapshot: true # Capture active connections
+  bandwidth_threshold_mb: 500
+  enable_process_attribution: true
+
+# Feature toggles for staged rollout
+features:
+  enable_fim: true
+  enable_network_monitoring: true
+  enable_advanced_windows_events: true
+  enable_linux_application_logs: true
+
+# File Integrity Monitoring configuration
+fim:
+  canary_file_name: ".soc_canary"
+  monitor_directories:
+    windows:
+      - "C:\\Users\\*\\Documents"
+      - "C:\\Users\\*\\Desktop"
+    linux:
+      - "/home/*/Documents"
+      - "/root"
+
