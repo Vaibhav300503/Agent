@@ -11,5 +11,13 @@ psutil>=5.9.0          # Network I/O counters, process information, and connecti
 watchdog>=2.3.0        # File system event monitoring for FIM canary detection
 python-dateutil>=2.8.2 # Enhanced timestamp parsing (optional but recommended)
 
+# GeoIP enrichment (agent-side IP geolocation and ASN lookup)
+geoip2>=4.7.0          # MaxMind GeoIP2 database reader
+maxminddb>=2.4.0       # Low-level mmdb reader (geoip2 dependency)
+
+# SOAR Engine & Testing
+redis>=5.0.0           # For SOAR idempotency and rate limiting
+pytest>=7.0.0          # Testing framework (optional)
+
 # Build dependencies (for creating Windows executable)
 pyinstaller>=5.7.0

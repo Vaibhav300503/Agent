@@ -209,3 +209,40 @@ class Config:
         """Check if TLS monitoring is enabled"""
         return self.config.get('tls_monitoring', {}).get('enabled', False)
 
+    # GeoIP Enrichment Configuration
+    @property
+    def enable_geo_enrichment(self):
+        """Check if agent-side GeoIP enrichment is enabled"""
+        return self.config.get('geo_enrichment', {}).get('enabled', True)
+
+    @property
+    def geoip_city_db_path(self):
+        """Path to MaxMind GeoLite2-City.mmdb database"""
+        return self.config.get('geo_enrichment', {}).get('geoip_city_db', 'data/GeoLite2-City.mmdb')
+
+    @property
+    def geoip_asn_db_path(self):
+        """Path to MaxMind GeoLite2-ASN.mmdb database"""
+        return self.config.get('geo_enrichment', {}).get('geoip_asn_db', 'data/GeoLite2-ASN.mmdb')
+
+    @property
+    def reverse_dns_enabled(self):
+        """Check if reverse DNS lookups are enabled"""
+        return self.config.get('geo_enrichment', {}).get('reverse_dns', True)
+
+    @property
+    def reverse_dns_timeout(self):
+        """Reverse DNS lookup timeout in seconds"""
+        return self.config.get('geo_enrichment', {}).get('reverse_dns_timeout_sec', 1.0)
+
+    @property
+    def geo_cache_max_size(self):
+        """Maximum number of entries in the GeoIP LRU cache"""
+        return self.config.get('geo_enrichment', {}).get('cache_max_size', 10000)
+
+    @property
+    def geo_cache_ttl(self):
+        """TTL in seconds for cached GeoIP entries"""
+        return self.config.get('geo_enrichment', {}).get('cache_ttl_sec', 3600)
+
+

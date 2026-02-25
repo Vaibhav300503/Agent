@@ -462,6 +462,8 @@ def enrich_log(log_entry: Dict[str, Any], config=None) -> Dict[str, Any]:
     3. Severity standardization
     4. Log categorization
     5. Metadata enrichment (source/destination)
+    6. IP resolution and GeoIP enrichment
+    7. Risk scoring (SOAR eligibility)
     
     Args:
         log_entry: Raw log entry dictionary
@@ -477,6 +479,39 @@ def enrich_log(log_entry: Dict[str, Any], config=None) -> Dict[str, Any]:
     log_entry = LogEnricher.normalize_severity(log_entry)
     log_entry = LogEnricher.categorize_log(log_entry)
     log_entry = LogEnricher.enrich_metadata(log_entry, config)
+    
+    # IP Resolution and GeoIP Enrichment (Step 6)
+    try:
+        from geo_enricher import enrich_log_ips, GeoEnricher
+        from utils import get_ip_address
+
+        # Reuse a module-level enricher singleton for cache efficiency
+        if not hasattr(enrich_log, '_geo_enricher'):
+            enrich_log._geo_enricher = GeoEnricher(config) if config else GeoEnricher()
+
+        agent_ip = get_ip_address()
+        log_entry = enrich_log_ips(
+            log_entry,
+            agent_ip=agent_ip,
+            config=config,
+            enricher=enrich_log._geo_enricher
+        )
+    except ImportError:
+        # geo_enricher or geoip2 not available — skip silently
+        pass
+    except Exception as e:
+        import logging as _logging
+        _logging.getLogger(__name__).debug(f"IP/Geo enrichment skipped: {e}")
+    
+    # Risk Scoring (Step 7 — SOAR eligibility)
+    try:
+        from soar_engine import enrich_log_risk
+        log_entry = enrich_log_risk(log_entry)
+    except ImportError:
+        pass
+    except Exception as e:
+        import logging as _logging
+        _logging.getLogger(__name__).debug(f"Risk scoring skipped: {e}")
     
     return log_entry
 

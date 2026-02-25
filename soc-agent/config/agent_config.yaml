@@ -66,3 +66,19 @@ fim:
       - "/home/*/Documents"
       - "/root"
 
+# Timing configuration
+timing:
+  heartbeat_interval_sec: 420
+  batch_interval_sec: 200
+
+# GeoIP Enrichment (agent-side)
+geo_enrichment:
+  enabled: true
+  geoip_city_db: "data/GeoLite2-City.mmdb"
+  geoip_asn_db: "data/GeoLite2-ASN.mmdb"
+  reverse_dns: true
+  reverse_dns_timeout_sec: 1.0
+  cache_max_size: 10000
+  cache_ttl_sec: 3600
+  enrich_private_ips: false
+
