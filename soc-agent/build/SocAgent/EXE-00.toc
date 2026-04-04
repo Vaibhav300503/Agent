@@ -1,5 +1,5 @@
 ('C:\\Users\\INDIA '
- 'TECHNOLOGY\\Desktop\\test1\\soc-agent\\build\\SocAgent\\SocAgent.exe',
+ 'TECHNOLOGY\\Desktop\\Agent\\soc-agent\\build\\SocAgent\\SocAgent.exe',
  True,
  False,
  True,
@@ -32,31 +32,31 @@
  None,
  None,
  'C:\\Users\\INDIA '
- 'TECHNOLOGY\\Desktop\\test1\\soc-agent\\build\\SocAgent\\SocAgent.pkg',
+ 'TECHNOLOGY\\Desktop\\Agent\\soc-agent\\build\\SocAgent\\SocAgent.pkg',
  [('pyi-contents-directory _internal', '', 'OPTION'),
   ('PYZ-00.pyz',
    'C:\\Users\\INDIA '
-   'TECHNOLOGY\\Desktop\\test1\\soc-agent\\build\\SocAgent\\PYZ-00.pyz',
+   'TECHNOLOGY\\Desktop\\Agent\\soc-agent\\build\\SocAgent\\PYZ-00.pyz',
    'PYZ'),
   ('struct',
    'C:\\Users\\INDIA '
-   'TECHNOLOGY\\Desktop\\test1\\soc-agent\\build\\SocAgent\\localpycs\\struct.pyc',
+   'TECHNOLOGY\\Desktop\\Agent\\soc-agent\\build\\SocAgent\\localpycs\\struct.pyc',
    'PYMODULE'),
   ('pyimod01_archive',
    'C:\\Users\\INDIA '
-   'TECHNOLOGY\\Desktop\\test1\\soc-agent\\build\\SocAgent\\localpycs\\pyimod01_archive.pyc',
+   'TECHNOLOGY\\Desktop\\Agent\\soc-agent\\build\\SocAgent\\localpycs\\pyimod01_archive.pyc',
    'PYMODULE'),
   ('pyimod02_importers',
    'C:\\Users\\INDIA '
-   'TECHNOLOGY\\Desktop\\test1\\soc-agent\\build\\SocAgent\\localpycs\\pyimod02_importers.pyc',
+   'TECHNOLOGY\\Desktop\\Agent\\soc-agent\\build\\SocAgent\\localpycs\\pyimod02_importers.pyc',
    'PYMODULE'),
   ('pyimod03_ctypes',
    'C:\\Users\\INDIA '
-   'TECHNOLOGY\\Desktop\\test1\\soc-agent\\build\\SocAgent\\localpycs\\pyimod03_ctypes.pyc',
+   'TECHNOLOGY\\Desktop\\Agent\\soc-agent\\build\\SocAgent\\localpycs\\pyimod03_ctypes.pyc',
    'PYMODULE'),
   ('pyimod04_pywin32',
    'C:\\Users\\INDIA '
-   'TECHNOLOGY\\Desktop\\test1\\soc-agent\\build\\SocAgent\\localpycs\\pyimod04_pywin32.pyc',
+   'TECHNOLOGY\\Desktop\\Agent\\soc-agent\\build\\SocAgent\\localpycs\\pyimod04_pywin32.pyc',
    'PYMODULE'),
   ('pyiboot01_bootstrap',
    'C:\\Users\\INDIA '
@@ -78,18 +78,14 @@
    'C:\\Users\\INDIA '
    'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_multiprocessing.py',
    'PYSOURCE'),
-  ('pyi_rth_setuptools',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_setuptools.py',
-   'PYSOURCE'),
   ('service_windows',
    'C:\\Users\\INDIA '
-   'TECHNOLOGY\\Desktop\\test1\\soc-agent\\src\\service_windows.py',
+   'TECHNOLOGY\\Desktop\\Agent\\soc-agent\\src\\service_windows.py',
    'PYSOURCE')],
  [],
  False,
  False,
- 1766595789,
+ 1773413394,
  [('run.exe',
    'C:\\Users\\INDIA '
    'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',

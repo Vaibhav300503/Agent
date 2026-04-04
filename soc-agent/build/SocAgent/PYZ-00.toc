@@ -1,10 +1,7 @@
 ('C:\\Users\\INDIA '
- 'TECHNOLOGY\\Desktop\\test1\\soc-agent\\build\\SocAgent\\PYZ-00.pyz',
+ 'TECHNOLOGY\\Desktop\\Agent\\soc-agent\\build\\SocAgent\\PYZ-00.pyz',
  [('__future__',
    'C:\\Program Files\\Python312\\Lib\\__future__.py',
-   'PYMODULE'),
-  ('_aix_support',
-   'C:\\Program Files\\Python312\\Lib\\_aix_support.py',
    'PYMODULE'),
   ('_compat_pickle',
    'C:\\Program Files\\Python312\\Lib\\_compat_pickle.py',
@@ -12,23 +9,12 @@
   ('_compression',
    'C:\\Program Files\\Python312\\Lib\\_compression.py',
    'PYMODULE'),
-  ('_distutils_hack',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\_distutils_hack\\__init__.py',
-   'PYMODULE'),
-  ('_distutils_hack.override',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\_distutils_hack\\override.py',
-   'PYMODULE'),
   ('_py_abc', 'C:\\Program Files\\Python312\\Lib\\_py_abc.py', 'PYMODULE'),
   ('_pydatetime',
    'C:\\Program Files\\Python312\\Lib\\_pydatetime.py',
    'PYMODULE'),
   ('_pydecimal',
    'C:\\Program Files\\Python312\\Lib\\_pydecimal.py',
-   'PYMODULE'),
-  ('_sitebuiltins',
-   'C:\\Program Files\\Python312\\Lib\\_sitebuiltins.py',
    'PYMODULE'),
   ('_strptime', 'C:\\Program Files\\Python312\\Lib\\_strptime.py', 'PYMODULE'),
   ('_threading_local',
@@ -194,9 +180,6 @@
    'C:\\Program Files\\Python312\\Lib\\concurrent\\futures\\thread.py',
    'PYMODULE'),
   ('config', '-', 'PYMODULE'),
-  ('configparser',
-   'C:\\Program Files\\Python312\\Lib\\configparser.py',
-   'PYMODULE'),
   ('contextlib',
    'C:\\Program Files\\Python312\\Lib\\contextlib.py',
    'PYMODULE'),
@@ -287,14 +270,9 @@
   ('getopt', 'C:\\Program Files\\Python312\\Lib\\getopt.py', 'PYMODULE'),
   ('getpass', 'C:\\Program Files\\Python312\\Lib\\getpass.py', 'PYMODULE'),
   ('gettext', 'C:\\Program Files\\Python312\\Lib\\gettext.py', 'PYMODULE'),
-  ('glob', 'C:\\Program Files\\Python312\\Lib\\glob.py', 'PYMODULE'),
   ('gzip', 'C:\\Program Files\\Python312\\Lib\\gzip.py', 'PYMODULE'),
   ('hashlib', 'C:\\Program Files\\Python312\\Lib\\hashlib.py', 'PYMODULE'),
   ('hmac', 'C:\\Program Files\\Python312\\Lib\\hmac.py', 'PYMODULE'),
-  ('html', 'C:\\Program Files\\Python312\\Lib\\html\\__init__.py', 'PYMODULE'),
-  ('html.entities',
-   'C:\\Program Files\\Python312\\Lib\\html\\entities.py',
-   'PYMODULE'),
   ('http', 'C:\\Program Files\\Python312\\Lib\\http\\__init__.py', 'PYMODULE'),
   ('http.client',
    'C:\\Program Files\\Python312\\Lib\\http\\client.py',
@@ -304,9 +282,6 @@
    'PYMODULE'),
   ('http.cookies',
    'C:\\Program Files\\Python312\\Lib\\http\\cookies.py',
-   'PYMODULE'),
-  ('http.server',
-   'C:\\Program Files\\Python312\\Lib\\http\\server.py',
    'PYMODULE'),
   ('idna',
    'C:\\Users\\INDIA '
@@ -490,66 +465,6 @@
    'PYMODULE'),
   ('numbers', 'C:\\Program Files\\Python312\\Lib\\numbers.py', 'PYMODULE'),
   ('opcode', 'C:\\Program Files\\Python312\\Lib\\opcode.py', 'PYMODULE'),
-  ('packaging',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\__init__.py',
-   'PYMODULE'),
-  ('packaging._elffile',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\_elffile.py',
-   'PYMODULE'),
-  ('packaging._manylinux',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\_manylinux.py',
-   'PYMODULE'),
-  ('packaging._musllinux',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\_musllinux.py',
-   'PYMODULE'),
-  ('packaging._parser',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\_parser.py',
-   'PYMODULE'),
-  ('packaging._structures',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\_structures.py',
-   'PYMODULE'),
-  ('packaging._tokenizer',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\_tokenizer.py',
-   'PYMODULE'),
-  ('packaging.licenses',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\licenses\\__init__.py',
-   'PYMODULE'),
-  ('packaging.licenses._spdx',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\licenses\\_spdx.py',
-   'PYMODULE'),
-  ('packaging.markers',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\markers.py',
-   'PYMODULE'),
-  ('packaging.requirements',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\requirements.py',
-   'PYMODULE'),
-  ('packaging.specifiers',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\specifiers.py',
-   'PYMODULE'),
-  ('packaging.tags',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\tags.py',
-   'PYMODULE'),
-  ('packaging.utils',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\utils.py',
-   'PYMODULE'),
-  ('packaging.version',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\packaging\\version.py',
-   'PYMODULE'),
   ('pathlib', 'C:\\Program Files\\Python312\\Lib\\pathlib.py', 'PYMODULE'),
   ('pickle', 'C:\\Program Files\\Python312\\Lib\\pickle.py', 'PYMODULE'),
   ('pkgutil', 'C:\\Program Files\\Python312\\Lib\\pkgutil.py', 'PYMODULE'),
@@ -569,13 +484,6 @@
    'PYMODULE'),
   ('py_compile',
    'C:\\Program Files\\Python312\\Lib\\py_compile.py',
-   'PYMODULE'),
-  ('pydoc', 'C:\\Program Files\\Python312\\Lib\\pydoc.py', 'PYMODULE'),
-  ('pydoc_data',
-   'C:\\Program Files\\Python312\\Lib\\pydoc_data\\__init__.py',
-   'PYMODULE'),
-  ('pydoc_data.topics',
-   'C:\\Program Files\\Python312\\Lib\\pydoc_data\\topics.py',
    'PYMODULE'),
   ('pywin32_system32', '-', 'PYMODULE'),
   ('pywintypes',
@@ -653,632 +561,12 @@
    'C:\\Users\\INDIA '
    'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\requests\\utils.py',
    'PYMODULE'),
-  ('rlcompleter',
-   'C:\\Program Files\\Python312\\Lib\\rlcompleter.py',
-   'PYMODULE'),
   ('runpy', 'C:\\Program Files\\Python312\\Lib\\runpy.py', 'PYMODULE'),
   ('secrets', 'C:\\Program Files\\Python312\\Lib\\secrets.py', 'PYMODULE'),
   ('selectors', 'C:\\Program Files\\Python312\\Lib\\selectors.py', 'PYMODULE'),
-  ('setuptools',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._core_metadata',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_core_metadata.py',
-   'PYMODULE'),
-  ('setuptools._discovery',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_discovery.py',
-   'PYMODULE'),
-  ('setuptools._distutils',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._distutils._log',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\_log.py',
-   'PYMODULE'),
-  ('setuptools._distutils._modified',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\_modified.py',
-   'PYMODULE'),
-  ('setuptools._distutils._msvccompiler',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\_msvccompiler.py',
-   'PYMODULE'),
-  ('setuptools._distutils.archive_util',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\archive_util.py',
-   'PYMODULE'),
-  ('setuptools._distutils.ccompiler',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\ccompiler.py',
-   'PYMODULE'),
-  ('setuptools._distutils.cmd',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\cmd.py',
-   'PYMODULE'),
-  ('setuptools._distutils.command',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\command\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._distutils.command.bdist',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\command\\bdist.py',
-   'PYMODULE'),
-  ('setuptools._distutils.command.build',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\command\\build.py',
-   'PYMODULE'),
-  ('setuptools._distutils.command.build_ext',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\command\\build_ext.py',
-   'PYMODULE'),
-  ('setuptools._distutils.command.sdist',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\command\\sdist.py',
-   'PYMODULE'),
-  ('setuptools._distutils.compat',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\compat\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._distutils.compat.numpy',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\compat\\numpy.py',
-   'PYMODULE'),
-  ('setuptools._distutils.compat.py39',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\compat\\py39.py',
-   'PYMODULE'),
-  ('setuptools._distutils.compilers', '-', 'PYMODULE'),
-  ('setuptools._distutils.compilers.C', '-', 'PYMODULE'),
-  ('setuptools._distutils.compilers.C.base',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\compilers\\C\\base.py',
-   'PYMODULE'),
-  ('setuptools._distutils.compilers.C.errors',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\compilers\\C\\errors.py',
-   'PYMODULE'),
-  ('setuptools._distutils.compilers.C.msvc',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\compilers\\C\\msvc.py',
-   'PYMODULE'),
-  ('setuptools._distutils.core',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\core.py',
-   'PYMODULE'),
-  ('setuptools._distutils.debug',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\debug.py',
-   'PYMODULE'),
-  ('setuptools._distutils.dir_util',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\dir_util.py',
-   'PYMODULE'),
-  ('setuptools._distutils.dist',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\dist.py',
-   'PYMODULE'),
-  ('setuptools._distutils.errors',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\errors.py',
-   'PYMODULE'),
-  ('setuptools._distutils.extension',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\extension.py',
-   'PYMODULE'),
-  ('setuptools._distutils.fancy_getopt',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\fancy_getopt.py',
-   'PYMODULE'),
-  ('setuptools._distutils.file_util',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\file_util.py',
-   'PYMODULE'),
-  ('setuptools._distutils.filelist',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\filelist.py',
-   'PYMODULE'),
-  ('setuptools._distutils.log',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\log.py',
-   'PYMODULE'),
-  ('setuptools._distutils.spawn',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\spawn.py',
-   'PYMODULE'),
-  ('setuptools._distutils.sysconfig',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\sysconfig.py',
-   'PYMODULE'),
-  ('setuptools._distutils.text_file',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\text_file.py',
-   'PYMODULE'),
-  ('setuptools._distutils.util',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\util.py',
-   'PYMODULE'),
-  ('setuptools._distutils.version',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\version.py',
-   'PYMODULE'),
-  ('setuptools._distutils.versionpredicate',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_distutils\\versionpredicate.py',
-   'PYMODULE'),
-  ('setuptools._entry_points',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_entry_points.py',
-   'PYMODULE'),
-  ('setuptools._imp',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_imp.py',
-   'PYMODULE'),
-  ('setuptools._importlib',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_importlib.py',
-   'PYMODULE'),
-  ('setuptools._itertools',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_itertools.py',
-   'PYMODULE'),
-  ('setuptools._normalization',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_normalization.py',
-   'PYMODULE'),
-  ('setuptools._path',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_path.py',
-   'PYMODULE'),
-  ('setuptools._reqs',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_reqs.py',
-   'PYMODULE'),
-  ('setuptools._shutil',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_shutil.py',
-   'PYMODULE'),
-  ('setuptools._static',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_static.py',
-   'PYMODULE'),
-  ('setuptools._vendor', '-', 'PYMODULE'),
-  ('setuptools._vendor.backports',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\backports\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.backports.tarfile',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\backports\\tarfile\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.backports.tarfile.compat',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\backports\\tarfile\\compat\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.backports.tarfile.compat.py38',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\backports\\tarfile\\compat\\py38.py',
-   'PYMODULE'),
-  ('setuptools._vendor.importlib_metadata',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\importlib_metadata\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.importlib_metadata._adapters',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_adapters.py',
-   'PYMODULE'),
-  ('setuptools._vendor.importlib_metadata._collections',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_collections.py',
-   'PYMODULE'),
-  ('setuptools._vendor.importlib_metadata._compat',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_compat.py',
-   'PYMODULE'),
-  ('setuptools._vendor.importlib_metadata._functools',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_functools.py',
-   'PYMODULE'),
-  ('setuptools._vendor.importlib_metadata._itertools',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_itertools.py',
-   'PYMODULE'),
-  ('setuptools._vendor.importlib_metadata._meta',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_meta.py',
-   'PYMODULE'),
-  ('setuptools._vendor.importlib_metadata._text',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_text.py',
-   'PYMODULE'),
-  ('setuptools._vendor.importlib_metadata.compat',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\importlib_metadata\\compat\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.importlib_metadata.compat.py311',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\importlib_metadata\\compat\\py311.py',
-   'PYMODULE'),
-  ('setuptools._vendor.importlib_metadata.compat.py39',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\importlib_metadata\\compat\\py39.py',
-   'PYMODULE'),
-  ('setuptools._vendor.jaraco', '-', 'PYMODULE'),
-  ('setuptools._vendor.jaraco.context',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\jaraco\\context.py',
-   'PYMODULE'),
-  ('setuptools._vendor.jaraco.functools',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\jaraco\\functools\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.jaraco.text',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\jaraco\\text\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.more_itertools',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\more_itertools\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.more_itertools.more',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\more_itertools\\more.py',
-   'PYMODULE'),
-  ('setuptools._vendor.more_itertools.recipes',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\more_itertools\\recipes.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging._elffile',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\_elffile.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging._manylinux',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\_manylinux.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging._musllinux',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\_musllinux.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging._parser',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\_parser.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging._structures',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\_structures.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging._tokenizer',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\_tokenizer.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging.markers',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\markers.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging.requirements',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\requirements.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging.specifiers',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\specifiers.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging.tags',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\tags.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging.utils',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\utils.py',
-   'PYMODULE'),
-  ('setuptools._vendor.packaging.version',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\packaging\\version.py',
-   'PYMODULE'),
-  ('setuptools._vendor.tomli',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\tomli\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.tomli._parser',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\tomli\\_parser.py',
-   'PYMODULE'),
-  ('setuptools._vendor.tomli._re',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\tomli\\_re.py',
-   'PYMODULE'),
-  ('setuptools._vendor.tomli._types',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\tomli\\_types.py',
-   'PYMODULE'),
-  ('setuptools._vendor.typing_extensions',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\typing_extensions.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.cli',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\cli\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.cli.convert',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\cli\\convert.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.cli.pack',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\cli\\pack.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.cli.tags',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\cli\\tags.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.cli.unpack',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\cli\\unpack.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.macosx_libfile',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\macosx_libfile.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.metadata',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\metadata.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.util',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\util.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging._elffile',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\_elffile.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging._manylinux',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\_manylinux.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging._musllinux',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\_musllinux.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging._parser',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\_parser.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging._structures',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\_structures.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging._tokenizer',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\_tokenizer.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging.markers',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\markers.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging.requirements',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\requirements.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging.specifiers',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\specifiers.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging.tags',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\tags.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging.utils',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\utils.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.vendored.packaging.version',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\vendored\\packaging\\version.py',
-   'PYMODULE'),
-  ('setuptools._vendor.wheel.wheelfile',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\wheel\\wheelfile.py',
-   'PYMODULE'),
-  ('setuptools._vendor.zipp',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\zipp\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.zipp.compat',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\zipp\\compat\\__init__.py',
-   'PYMODULE'),
-  ('setuptools._vendor.zipp.compat.py310',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\zipp\\compat\\py310.py',
-   'PYMODULE'),
-  ('setuptools._vendor.zipp.glob',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\_vendor\\zipp\\glob.py',
-   'PYMODULE'),
-  ('setuptools.archive_util',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\archive_util.py',
-   'PYMODULE'),
-  ('setuptools.command',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\command\\__init__.py',
-   'PYMODULE'),
-  ('setuptools.command._requirestxt',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\command\\_requirestxt.py',
-   'PYMODULE'),
-  ('setuptools.command.bdist_egg',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\command\\bdist_egg.py',
-   'PYMODULE'),
-  ('setuptools.command.bdist_wheel',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\command\\bdist_wheel.py',
-   'PYMODULE'),
-  ('setuptools.command.build',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\command\\build.py',
-   'PYMODULE'),
-  ('setuptools.command.egg_info',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\command\\egg_info.py',
-   'PYMODULE'),
-  ('setuptools.command.sdist',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\command\\sdist.py',
-   'PYMODULE'),
-  ('setuptools.command.setopt',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\command\\setopt.py',
-   'PYMODULE'),
-  ('setuptools.compat',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\compat\\__init__.py',
-   'PYMODULE'),
-  ('setuptools.compat.py310',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\compat\\py310.py',
-   'PYMODULE'),
-  ('setuptools.compat.py311',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\compat\\py311.py',
-   'PYMODULE'),
-  ('setuptools.compat.py39',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\compat\\py39.py',
-   'PYMODULE'),
-  ('setuptools.config',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\config\\__init__.py',
-   'PYMODULE'),
-  ('setuptools.config._apply_pyprojecttoml',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\config\\_apply_pyprojecttoml.py',
-   'PYMODULE'),
-  ('setuptools.config._validate_pyproject',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\config\\_validate_pyproject\\__init__.py',
-   'PYMODULE'),
-  ('setuptools.config._validate_pyproject.error_reporting',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\config\\_validate_pyproject\\error_reporting.py',
-   'PYMODULE'),
-  ('setuptools.config._validate_pyproject.extra_validations',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\config\\_validate_pyproject\\extra_validations.py',
-   'PYMODULE'),
-  ('setuptools.config._validate_pyproject.fastjsonschema_exceptions',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\config\\_validate_pyproject\\fastjsonschema_exceptions.py',
-   'PYMODULE'),
-  ('setuptools.config._validate_pyproject.fastjsonschema_validations',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\config\\_validate_pyproject\\fastjsonschema_validations.py',
-   'PYMODULE'),
-  ('setuptools.config._validate_pyproject.formats',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\config\\_validate_pyproject\\formats.py',
-   'PYMODULE'),
-  ('setuptools.config.expand',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\config\\expand.py',
-   'PYMODULE'),
-  ('setuptools.config.pyprojecttoml',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\config\\pyprojecttoml.py',
-   'PYMODULE'),
-  ('setuptools.config.setupcfg',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\config\\setupcfg.py',
-   'PYMODULE'),
-  ('setuptools.depends',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\depends.py',
-   'PYMODULE'),
-  ('setuptools.discovery',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\discovery.py',
-   'PYMODULE'),
-  ('setuptools.dist',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\dist.py',
-   'PYMODULE'),
-  ('setuptools.errors',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\errors.py',
-   'PYMODULE'),
-  ('setuptools.extension',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\extension.py',
-   'PYMODULE'),
-  ('setuptools.glob',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\glob.py',
-   'PYMODULE'),
-  ('setuptools.installer',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\installer.py',
-   'PYMODULE'),
-  ('setuptools.logging',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\logging.py',
-   'PYMODULE'),
-  ('setuptools.monkey',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\monkey.py',
-   'PYMODULE'),
-  ('setuptools.msvc',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\msvc.py',
-   'PYMODULE'),
-  ('setuptools.unicode_utils',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\unicode_utils.py',
-   'PYMODULE'),
-  ('setuptools.version',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\version.py',
-   'PYMODULE'),
-  ('setuptools.warnings',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\warnings.py',
-   'PYMODULE'),
-  ('setuptools.wheel',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\wheel.py',
-   'PYMODULE'),
-  ('setuptools.windows_support',
-   'C:\\Users\\INDIA '
-   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\setuptools\\windows_support.py',
-   'PYMODULE'),
-  ('shlex', 'C:\\Program Files\\Python312\\Lib\\shlex.py', 'PYMODULE'),
   ('shutil', 'C:\\Program Files\\Python312\\Lib\\shutil.py', 'PYMODULE'),
   ('signal', 'C:\\Program Files\\Python312\\Lib\\signal.py', 'PYMODULE'),
-  ('site', 'C:\\Program Files\\Python312\\Lib\\site.py', 'PYMODULE'),
   ('socket', 'C:\\Program Files\\Python312\\Lib\\socket.py', 'PYMODULE'),
-  ('socketserver',
-   'C:\\Program Files\\Python312\\Lib\\socketserver.py',
-   'PYMODULE'),
   ('sqlite3',
    'C:\\Program Files\\Python312\\Lib\\sqlite3\\__init__.py',
    'PYMODULE'),
@@ -1292,25 +580,25 @@
    'C:\\Program Files\\Python312\\Lib\\sqlite3\\dump.py',
    'PYMODULE'),
   ('src',
-   'C:\\Users\\INDIA TECHNOLOGY\\Desktop\\test1\\soc-agent\\src\\__init__.py',
+   'C:\\Users\\INDIA TECHNOLOGY\\Desktop\\Agent\\soc-agent\\src\\__init__.py',
    'PYMODULE'),
   ('src.agent',
-   'C:\\Users\\INDIA TECHNOLOGY\\Desktop\\test1\\soc-agent\\src\\agent.py',
+   'C:\\Users\\INDIA TECHNOLOGY\\Desktop\\Agent\\soc-agent\\src\\agent.py',
    'PYMODULE'),
   ('src.collectors', '-', 'PYMODULE'),
   ('src.collectors.base',
    'C:\\Users\\INDIA '
-   'TECHNOLOGY\\Desktop\\test1\\soc-agent\\src\\collectors\\base.py',
+   'TECHNOLOGY\\Desktop\\Agent\\soc-agent\\src\\collectors\\base.py',
    'PYMODULE'),
   ('src.collectors.windows',
    'C:\\Users\\INDIA '
-   'TECHNOLOGY\\Desktop\\test1\\soc-agent\\src\\collectors\\windows.py',
+   'TECHNOLOGY\\Desktop\\Agent\\soc-agent\\src\\collectors\\windows.py',
    'PYMODULE'),
   ('src.config',
-   'C:\\Users\\INDIA TECHNOLOGY\\Desktop\\test1\\soc-agent\\src\\config.py',
+   'C:\\Users\\INDIA TECHNOLOGY\\Desktop\\Agent\\soc-agent\\src\\config.py',
    'PYMODULE'),
   ('src.transport',
-   'C:\\Users\\INDIA TECHNOLOGY\\Desktop\\test1\\soc-agent\\src\\transport.py',
+   'C:\\Users\\INDIA TECHNOLOGY\\Desktop\\Agent\\soc-agent\\src\\transport.py',
    'PYMODULE'),
   ('ssl', 'C:\\Program Files\\Python312\\Lib\\ssl.py', 'PYMODULE'),
   ('statistics',
@@ -1323,30 +611,20 @@
   ('subprocess',
    'C:\\Program Files\\Python312\\Lib\\subprocess.py',
    'PYMODULE'),
-  ('sysconfig', 'C:\\Program Files\\Python312\\Lib\\sysconfig.py', 'PYMODULE'),
   ('tarfile', 'C:\\Program Files\\Python312\\Lib\\tarfile.py', 'PYMODULE'),
   ('tempfile', 'C:\\Program Files\\Python312\\Lib\\tempfile.py', 'PYMODULE'),
   ('textwrap', 'C:\\Program Files\\Python312\\Lib\\textwrap.py', 'PYMODULE'),
   ('threading', 'C:\\Program Files\\Python312\\Lib\\threading.py', 'PYMODULE'),
   ('token', 'C:\\Program Files\\Python312\\Lib\\token.py', 'PYMODULE'),
   ('tokenize', 'C:\\Program Files\\Python312\\Lib\\tokenize.py', 'PYMODULE'),
-  ('tomllib',
-   'C:\\Program Files\\Python312\\Lib\\tomllib\\__init__.py',
-   'PYMODULE'),
-  ('tomllib._parser',
-   'C:\\Program Files\\Python312\\Lib\\tomllib\\_parser.py',
-   'PYMODULE'),
-  ('tomllib._re',
-   'C:\\Program Files\\Python312\\Lib\\tomllib\\_re.py',
-   'PYMODULE'),
-  ('tomllib._types',
-   'C:\\Program Files\\Python312\\Lib\\tomllib\\_types.py',
-   'PYMODULE'),
   ('tracemalloc',
    'C:\\Program Files\\Python312\\Lib\\tracemalloc.py',
    'PYMODULE'),
-  ('tty', 'C:\\Program Files\\Python312\\Lib\\tty.py', 'PYMODULE'),
   ('typing', 'C:\\Program Files\\Python312\\Lib\\typing.py', 'PYMODULE'),
+  ('typing_extensions',
+   'C:\\Users\\INDIA '
+   'TECHNOLOGY\\AppData\\Roaming\\Python\\Python312\\site-packages\\typing_extensions.py',
+   'PYMODULE'),
   ('unittest',
    'C:\\Program Files\\Python312\\Lib\\unittest\\__init__.py',
    'PYMODULE'),
@@ -1364,9 +642,6 @@
    'PYMODULE'),
   ('unittest.main',
    'C:\\Program Files\\Python312\\Lib\\unittest\\main.py',
-   'PYMODULE'),
-  ('unittest.mock',
-   'C:\\Program Files\\Python312\\Lib\\unittest\\mock.py',
    'PYMODULE'),
   ('unittest.result',
    'C:\\Program Files\\Python312\\Lib\\unittest\\result.py',
@@ -1545,9 +820,6 @@
   ('uuid', 'C:\\Program Files\\Python312\\Lib\\uuid.py', 'PYMODULE'),
   ('watchdog',
    'C:\\Program Files\\Python312\\Lib\\site-packages\\watchdog\\__init__.py',
-   'PYMODULE'),
-  ('webbrowser',
-   'C:\\Program Files\\Python312\\Lib\\webbrowser.py',
    'PYMODULE'),
   ('win32', '-', 'PYMODULE'),
   ('win32.winxpgui',
